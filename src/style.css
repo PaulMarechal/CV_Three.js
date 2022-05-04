@@ -1,0 +1,127 @@
+@font-face {
+    font-family: "Monument";
+    src: url("https://res.cloudinary.com/holatresveces/raw/upload/v1573001944/MonumentExtended-Ultrabold_clzvv7.otf");
+}
+
+  
+html,
+body {
+  height: 100%;
+}
+
+  
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    margin: 0px;
+    font-family: monospace;
+    color: white;
+    font-family: "Monument";
+    font-size: 80px;
+    line-height: 70px;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+main {
+    width: 100vw;
+    height: 200vw;
+    z-index: 99;
+    position: absolute;
+    /* justify-content: center; */
+    /* text-align: center; */
+    pointer-events: none;
+    font-size: 5vh;
+}
+
+section {
+    min-height: 100vh;
+    padding: 20px;
+    font-size: 4vh;
+    
+}
+
+.glass{
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 35%;
+    margin-left: 5em;
+    margin: 3em 0em 9em 3em;
+}
+
+#scrollProgress {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 99999;
+    font-size: 3vh;
+}
+
+.mainTitle{
+    color: #000; 
+    margin-top: 3em;
+    margin-right: 20px;
+    /* text-align: center;
+     justify-content: center!important; */
+    /* right: 0!important; */
+    text-align: end;
+}
+  
+.container {
+    position: relative;
+    height: 70px;
+    overflow: hidden;
+    outline: 1px transparent;
+    margin-top: -13.15em;
+    margin-left: 0px;
+
+}
+
+.mainMenu {
+    position: absolute;
+    top: 5em;
+    left: 0;
+    list-style: none;
+    white-space: nowrap;
+
+}
+
+.menu {
+    color: transparent;
+    -webkit-text-stroke: 1px black;
+    left : 0;
+    margin-left: 20px;
+}
+
+p{
+    font-size: 20px;
+    line-height: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: lighter!important;
+
+}
+
+h2{
+    font-size: 26px;
+}
+
+h4{
+    font-size: 22px;
+}
+
+
