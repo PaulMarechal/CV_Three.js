@@ -24,13 +24,13 @@ body {
     font-family: monospace;
     color: white;
     font-family: "Monument";
-    font-size: 80px;
+    /* font-size: 80px; */
     line-height: 70px;
 }
 
 canvas {
     position: fixed;
-    top: 0;
+    top: 0px;
     left: 0;
 }
 
@@ -42,14 +42,17 @@ main {
     /* justify-content: center; */
     /* text-align: center; */
     pointer-events: none;
-    font-size: 5vh;
 }
 
 section {
     min-height: 100vh;
     padding: 20px;
-    font-size: 4vh;
+    font-size: 3vh;
     
+}
+
+.titleJob{
+    line-height: 20px;
 }
 
 .glass{
@@ -62,6 +65,32 @@ section {
     width: 35%;
     margin-left: 5em;
     margin: 3em 0em 9em 3em;
+}
+
+.glass1{
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 35%;
+    margin-left: 15em;
+    padding: 0 0 1em 1.5em;
+    margin: 6em 0em 9em 3em;
+}
+
+.glass2{
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 35%;
+    /* margin-left: 5em; */
+    padding: 0 0 1em 1.5em;
+    margin: 6em 0em 9em 35em;
 }
 
 #scrollProgress {
@@ -80,6 +109,13 @@ section {
      justify-content: center!important; */
     /* right: 0!important; */
     text-align: end;
+    font-size: 10vh;
+}
+
+.liste{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2vh;
+    line-height: 20px;
 }
   
 .container {
@@ -87,7 +123,7 @@ section {
     height: 70px;
     overflow: hidden;
     outline: 1px transparent;
-    margin-top: -13.15em;
+    margin-top: -17.3em;
     margin-left: 0px;
 
 }
@@ -98,7 +134,7 @@ section {
     left: 0;
     list-style: none;
     white-space: nowrap;
-
+    font-size: 5vh;
 }
 
 .menu {
@@ -109,19 +145,56 @@ section {
 }
 
 p{
-    font-size: 20px;
+    font-size: 15px;
     line-height: 30px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: lighter!important;
+    text-align: justify;
 
 }
 
 h2{
-    font-size: 26px;
+    font-size: 23px;
 }
 
 h4{
-    font-size: 22px;
+    font-size: 16px;
+    line-height: 20px;
+    padding-top: 2em;
 }
 
+h5{
+    font-size: 13px;
+}
 
+/* test button */
+
+
+.button {
+    font-family: 'Comfortaa',cursive;
+    font-size: 20px;
+    color: rgba(255,255,255,0.7);
+    background: rgb(2,0,36);
+    background: linear-gradient(45deg, rgba(2,0,36,0) 5%, rgba(255,255,255,.5) 6%, rgba(255,255,255,0) 9%, rgba(255,255,255,.5) 10%, rgba(255,255,255,0) 17%, rgba(255,255,255,.5) 19%, rgba(255,255,255,0) 21%);
+      background-size: 150%;
+    background-position: right;
+    transition: 1s;
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    box-shadow: inset 0px 3px 5px rgba(255,255,255,0.5), 0px 0px 10px rgba(0,0,0,0.15);
+    border: none;
+    position: absolute;
+    top: 45%;
+    cursor: pointer;
+}
+  
+.button:hover {
+    background-position: left;
+    color: white;
+      box-shadow: inset 0px 3px 5px rgba(255,255,255,1), 0px 0px 10px rgba(0,0,0,0.25);
+}
+  
+a:-webkit-any-link{
+    text-decoration: none;
+}

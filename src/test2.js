@@ -633,7 +633,8 @@ scene.add(ambientLight)
 const clock = new THREE.Clock()
 
 function animate() {
-
+    const elapsedTime = clock.getElapsedTime()
+    requestAnimationFrame(animate)
 
     playScrollAnimations()
 

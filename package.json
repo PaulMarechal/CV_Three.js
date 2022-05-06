@@ -8,7 +8,9 @@
   "dependencies": {
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
+    "@bijection/smoke": "^1.0.2",
     "babel-loader": "^8.2.3",
+    "circletype": "^2.3.0",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.5.1",
@@ -17,6 +19,7 @@
     "html-loader": "^3.1.0",
     "html-webpack-plugin": "^5.5.0",
     "ip": "^1.1.5",
+    "locomotive-scroll": "^4.1.4",
     "mini-css-extract-plugin": "^2.5.3",
     "portfinder-sync": "0.0.2",
     "raw-loader": "^4.0.2",

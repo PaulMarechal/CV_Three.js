@@ -4,12 +4,17 @@ import firefliesVertexShader from './shaders/fireflies/vertex.glsl'
 import firefliesFragmentShader from './shaders/fireflies/fragment.glsl'
 import testVertexShader from './shaders/test/vertex.glsl'
 import testFragmentShader from './shaders/test/fragment.glsl'
+import waterVertexShader from './shaders/water/vertex.glsl'
+import waterFragmentShader from './shaders/water/fragment.glsl'
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { gsap } from "gsap"
 import typefaceFont from 'three/examples/fonts/helvetiker_regular.typeface.json'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
+import CircleType from 'circletype'
+// import LocomotiveScroll from "https://cdn.skypack.dev/locomotive-scroll"
+import LocomotiveScroll from 'locomotive-scroll';
 
 const scene = new THREE.Scene()
 const gui = new GUI({
@@ -17,6 +22,13 @@ const gui = new GUI({
 })
 const textureLoader = new THREE.TextureLoader()
 
+// /**
+//  * Locomotive scroll
+//  */
+// const scroller = new LocomotiveScroll({
+//   el: document.querySelector("[data-scroll-container]"),
+//   smooth: true
+// });
 /**
  * Fonts
  */
@@ -90,8 +102,8 @@ fontLoader.load(
         // const text3 = new THREE.Mesh(textGeometry3, textMaterial)
 
         // test disposition1 
-        text.position.set(-2.61, 3.64, -4.7)
-        text.rotation.y = 2.7
+        text.position.set(-3.13, 4.8, -2.61)
+        text.rotation.y = 2.6
         text.rotation.z = 4.7
 
         // test disposition2 
@@ -105,12 +117,6 @@ fontLoader.load(
         // text3.rotation.y = 2.7
         // text1.rotation.z = 1.6
 
-        // gui.add(text.position, 'x').min(-20).max(20).step(0.01).name('Cube x')
-        // gui.add(text.position, 'y').min(-20).max(20).step(0.01).name('Cube y')
-        // gui.add(text.position, 'z').min(-20).max(20).step(0.01).name('Cube z')
-        // gui.add(text.rotation, 'y').min(-20).max(20).step(0.01).name('Cube z')
-        // gui.add(text.rotation, 'z').min(-20).max(20).step(0.01).name('Cube z')
-
         scene.add(text)
         // scene.add(text1)
         // scene.add(text2)
@@ -121,21 +127,94 @@ fontLoader.load(
 /**
  * Image de fond
  */
-// Geometry
-const geometryImageFond = new THREE.PlaneGeometry(1, 1, 32, 32)
-// Material
+// Geometry Image de fond 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+console.log(getRandomInt(0, 20));
+const geometryImageFond = new THREE.PlaneGeometry(15, 10, 128, 128)
+// Material Image de fond 1
 const materialImageFond = new THREE.ShaderMaterial({
     vertexShader: testVertexShader,
     fragmentShader: testFragmentShader,
-    side: THREE.DoubleSide
+    side: THREE.DoubleSide, 
+    uniforms:
+    {
+        uTime: { value: getRandomInt(0, 20) },
+        strenghValue: { value: 10 }
+    }
 })
 
-// Mesh
+// Mesh Image de fond 1
 const mesh = new THREE.Mesh(geometryImageFond, materialImageFond)
-mesh.position.set(-2.61, 1.64, -3)
+mesh.position.set(0.26, 11.45, 4.94)
+mesh.rotation.y = 0.66
+        // gui.add(mesh.position, 'x').min(-40).max(40).step(0.01).name('Cube x')
+        // gui.add(mesh.position, 'y').min(-40).max(40).step(0.01).name('Cube y')
+        // gui.add(mesh.position, 'z').min(-40).max(40).step(0.01).name('Cube z')
+        // gui.add(mesh.rotation, 'y').min(-40).max(40).step(0.01).name('Cube z')
 scene.add(mesh)
 
+ /**************** Dynamic mesh ***************/
+const debugObject = {}
+/**
+ * Water
+ */
+// Geometry
+// const waterGeometry = new THREE.PlaneGeometry(10, 10, 512, 512)
 
+// Colors
+// debugObject.depthColor = '#186691'
+// debugObject.surfaceColor = '#9bd8ff'
+// debugObject.depthColor = '#fff'
+// debugObject.surfaceColor = '#000'
+
+// gui.addColor(debugObject, 'depthColor').onChange(() => { waterMaterial.uniforms.uDepthColor.value.set(debugObject.depthColor) })
+// gui.addColor(debugObject, 'surfaceColor').onChange(() => { waterMaterial.uniforms.uSurfaceColor.value.set(debugObject.surfaceColor) })
+
+
+// gui.add(waterMaterial.uniforms.uBigWavesElevation, 'value').min(0).max(1).step(0.001).name('uBigWavesElevation')
+// gui.add(waterMaterial.uniforms.uBigWavesFrequency.value, 'x').min(0).max(10).step(0.001).name('uBigWavesFrequencyX')
+// gui.add(waterMaterial.uniforms.uBigWavesFrequency.value, 'y').min(0).max(10).step(0.001).name('uBigWavesFrequencyY')
+// gui.add(waterMaterial.uniforms.uBigWavesSpeed, 'value').min(0).max(4).step(0.001).name('uBigWavesSpeed')
+
+
+// gui.add(waterMaterial.uniforms.uSmallWavesElevation, 'value').min(0).max(1).step(0.001).name('uSmallWavesElevation')
+// gui.add(waterMaterial.uniforms.uSmallWavesFrequency, 'value').min(0).max(30).step(0.001).name('uSmallWavesFrequency')
+// gui.add(waterMaterial.uniforms.uSmallWavesSpeed, 'value').min(0).max(4).step(0.001).name('uSmallWavesSpeed')
+// gui.add(waterMaterial.uniforms.uSmallIterations, 'value').min(0).max(5).step(1).name('uSmallIterations')
+
+// gui.add(waterMaterial.uniforms.uColorOffset, 'value').min(0).max(1).step(0.001).name('uColorOffset')
+// gui.add(waterMaterial.uniforms.uColorMultiplier, 'value').min(0).max(10).step(0.001).name('uColorMultiplier')
+
+// Mesh
+// const water = new THREE.Mesh(waterGeometry, waterMaterial)
+// water.rotation.x = - Math.PI * 0.5
+// water.position.y = 1
+// scene.add(water)
+
+        // gui.add(water.rotation, 'x').min(-20).max(20).step(0.01).name('Plane2 z')
+        // gui.add(water.rotation, 'y').min(-20).max(20).step(0.01).name('Plane8 y')
+        // gui.add(water.rotation, 'z').min(-20).max(20).step(0.01).name('Plane8 y')
+
+// /**
+//  * Ground 
+//  */
+// const geometryCircle = new THREE.CircleGeometry( 5, 32 );
+// const materialCircle = new THREE.MeshStandardMaterial( { 
+//     color: 0xffffff,
+//     metalness: 0.6,
+//     emissive: 0xffffff
+//     // side: THREE.DoubleSide
+// } );
+// const circle = new THREE.Mesh( geometryCircle, materialCircle );
+//         gui.add(circle.position, 'x').min(-20).max(20).step(0.01).name('Plane2 z')
+//         gui.add(circle.position, 'y').min(-20).max(20).step(0.01).name('Plane8 y')
+//         gui.add(circle.position, 'z').min(-20).max(20).step(0.01).name('Plane8 y')
+//         gui.add(circle.rotation, 'x').min(-20).max(20).step(0.01).name('Plane8 y')
+// scene.add( circle );
 /**
  * 3D Model 
  */
@@ -206,10 +285,18 @@ fbxLoader.load(
     }
 )
 
+// scene.background = new THREE.Color( '#fff' );
 scene.background = new THREE.Color( '#21272D' );
+
+
 // var bgTexture = new THREE.Color( '#21272D' );
 // // bgTexture.minFilter = THREE.LinearFilter;
 // // scene.background = bgTexture;
+
+// const geometryBackground = new THREE.CylinderGeometry( 5, 5, 20, 45, 35 );
+// const materialBackground = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+// const cylinderBackground = new THREE.Mesh( geometry, material );
+// scene.add( cylinderBackground );
 
 
 const gridHelper = new THREE.GridHelper(100, 100, 0xaec6cf, 0xaec6cf)
@@ -381,7 +468,10 @@ formationsPicture2.rotation.y = 8.53
 formationsPicture2.position.set(-0.79, 9.4, -1.0)
 scene.add( formationsPicture2 );
 
+
 const renderer = new THREE.WebGLRenderer()
+renderer.shadowMap.enabled = true
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
@@ -425,7 +515,7 @@ const container = document.querySelector(".container");
 
 document.body.addEventListener("mousemove", e => {
   const x = e.clientX;
-  const y = e.clientY - 35;
+  const y = e.clientY;
   gsap.to(container, {
     y: y
   });
@@ -449,13 +539,84 @@ cube.position.set(-0.9 ,3.2, -0.2)
 
 scene.add( cube );
 
-window.addEventListener('resize', onWindowResize, false)
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    render()
+/**
+ * Background
+ */
+const options = {
+    enableSwoopingCamera: false,
+    enableRotation: true,
+    transmission: 1,
+    thickness: 0,
+    roughness: 0.67,
+    envMapIntensity: 1.5,
+    clearcoat: 1,
+    clearcoatRoughness: 0.12
 }
+
+// const bgTexture = new THREE.TextureLoader().load("images/textureFond.jpg");
+// const bgGeometry = new THREE.PlaneGeometry(5, 5);
+// const bgMaterial = new THREE.MeshBasicMaterial({ map: bgTexture });
+// const bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
+// bgMesh.position.set(0, 3, -1);
+
+// scene.add(bgMesh);
+
+const positionsTest = [
+    [0, 6.85, 0],
+];
+
+const geometriesTest = [
+    new THREE.CylinderGeometry( 13, 13, 35, 45, 35 )
+    // new THREE.IcosahedronGeometry(0.67, 24), // Sphere
+];
+
+const materialTest = new THREE.MeshPhysicalMaterial({
+    transmission: options.transmission,
+    thickness: options.thickness,
+    roughness: options.roughness,
+    envMapIntensity: options.envMapIntensity,
+    clearcoat: options.clearcoat,
+    clearcoatRoughness: options.clearcoatRoughness,
+    side: THREE.DoubleSide
+});
+
+const meshesTest = geometriesTest.map(
+    (geometry) => new THREE.Mesh(geometry, materialTest)
+);
+
+meshesTest.forEach((mesh, i) => {
+    scene.add(mesh);
+    mesh.position.set(...positionsTest[i]);
+});
+
+geometry.rotateX(Math.PI / 2);
+geometry.translate(0, -4, 0);
+
+// ------
+// Update
+// ------
+
+const update = (time, deltaTime) => {
+const ROTATE_TIME = 10; // Time in seconds for a full rotation
+const xAxis = new THREE.Vector3(1, 0, 0);
+const yAxis = new THREE.Vector3(0, 1, 0);
+const rotateX = (deltaTime / ROTATE_TIME) * Math.PI * 2;
+const rotateY = (deltaTime / ROTATE_TIME) * Math.PI * 2;
+
+if (options.enableRotation) {
+    meshes.forEach((mesh) => {
+      mesh.rotateOnWorldAxis(xAxis, rotateX);
+      mesh.rotateOnWorldAxis(yAxis, rotateY);
+    });
+}
+
+if (options.enableSwoopingCamera) {
+    camera.position.x = Math.sin((time / 10) * Math.PI * 2) * 2;
+    camera.position.y = Math.cos((time / 10) * Math.PI * 2) * 2;
+    camera.position.z = 4;
+    camera.lookAt(scene.position);
+    }
+};
 
 function lerp ( x, y, z ) {
   return(1 - z) * x + z * y
@@ -465,6 +626,21 @@ function lerp ( x, y, z ) {
 function scalePercent(start, end) {
     return (scrollPercent - start) / (end - start)
 }
+
+/**
+ * Lights ( background of scene )
+ */
+const light1 = new THREE.PointLight('#ff00ff', 16, 12)
+scene.add(light1)
+
+const light2 = new THREE.PointLight('#00ffff', 14, 12)
+scene.add(light2)
+
+const light3 = new THREE.PointLight('#ffff00', 20, 11)
+scene.add(light3)
+
+const light4 = new THREE.PointLight('#ffffff', 18, 12)
+scene.add(light4)
 
 const animationScripts = []
 
@@ -502,7 +678,7 @@ animationScripts.push({
         camera.rotation.y = lerp(3, 4.5, scalePercent(10, 20))
     },
 })
-
+// mesh.rotation.y = 0.65
 animationScripts.push({
     start: 20,
     end: 30,
@@ -511,7 +687,6 @@ animationScripts.push({
         camera.position.z = lerp(-1.5, 3.5, scalePercent(20, 30))
         camera.position.y = lerp(3, 4.5, scalePercent(20, 30))
         camera.rotation.y = lerp(4.5, 6, scalePercent(20, 30))
-
     },
 })
 
@@ -588,7 +763,7 @@ animationScripts.push({
     func: () => {
         camera.position.x = lerp(-0.2, -0.6, scalePercent(90, 100))
         camera.position.z = lerp(-3.8, -7, scalePercent(90, 100))
-        camera.position.y = lerp(11.2, 9, scalePercent(90, 100))
+        camera.position.y = lerp(11.2, 10, scalePercent(90, 100))
         camera.rotation.y = lerp(15, 16.4, scalePercent(90, 100))
     },
 })
@@ -724,18 +899,6 @@ scene.add(fireflies)
 /**
 * Lights
 */
-// const directionalLight = new THREE.DirectionalLight('#ffffff', 3)
-// directionalLight.position.set(0.52, 1.3, 0)
-// scene.add(directionalLight)
-
-// const directionalLight1 = new THREE.DirectionalLight('#ffffff', 3)
-// directionalLight1.position.set(-10.90, 8, 3.45)
-// scene.add(directionalLight1)
-
-// const directionalLight2 = new THREE.DirectionalLight('#ffffff', 1)
-// directionalLight2.position.set(-1.6, 3.38, -6.8)
-// scene.add(directionalLight2)
-
 const ambientLight = new THREE.AmbientLight(0xffffff,1)
 scene.add(ambientLight)
 
@@ -757,9 +920,44 @@ function animate() {
 
 function render() {
     const elapsedTime = clock.getElapsedTime()
+    // Image de fond 
+    materialImageFond.uniforms.uTime.value = elapsedTime 
+    materialImageFond.uniforms.strenghValue. value = elapsedTime
+
+    // Fireflies 
     firefliesMaterial.uniforms.uTime.value = elapsedTime 
     renderer.render(scene, camera)
+
+    // // Smoke
+    // material.dispose();
+    // renderer.dispose();
+
+    // Lights on background
+    const light1Angle = elapsedTime * 0.23
+    light1.position.x = Math.cos(light1Angle) * 14
+    light1.position.z = Math.sin(light1Angle) * 14
+    light1.position.y = Math.sin(elapsedTime * 13)
+
+    const light2Angle = - elapsedTime * 0.5
+    light2.position.x = Math.cos(light2Angle) * 13
+    light2.position.z = Math.sin(light2Angle) * 13
+    light2.position.y = Math.sin(elapsedTime * 10) + Math.sin(elapsedTime * 1)
+
+    const light3Angle = elapsedTime * 0.6
+    light3.position.x = Math.cos(light3Angle) * (14 + Math.sin(elapsedTime * 0.1))
+    light3.position.z = Math.sin(light3Angle) * (14 + Math.sin(elapsedTime * 0.1))
+    light3.position.y = Math.sin(elapsedTime * 10) + Math.cos(elapsedTime * 0.5)
+
+    const light4Angle = - elapsedTime * 0.23
+    light4.position.x = Math.cos(light4Angle) * 14
+    light4.position.z = Math.sin(light4Angle) * 14
+    light4.position.y = Math.sin(elapsedTime * 2)
+
 }
+
+//    gui.add(mesh.position, 'x').min(-20).max(20).step(0.01).name('Plane2 z')
+//         gui.add(mesh.position, 'y').min(-20).max(20).step(0.01).name('Plane8 y')
+//         gui.add(mesh.position, 'z').min(-20).max(20).step(0.01).name('Plane8 y')
 
 window.scrollTo({ top: 0, behavior: 'smooth' })
 animate()
