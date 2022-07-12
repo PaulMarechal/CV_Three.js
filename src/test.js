@@ -16,7 +16,7 @@ const materialObj = new THREE.MeshNormalMaterial()
 const matcapTexture = textureLoader.load('/textures/matcaps/8.png')
 let mixer; 
 fbxLoader.load(
-    'models/idle.fbx',
+    'models/Idle.fbx',
     (object) => {
         // object.traverse(function (child) {
         //     if (object.isMesh) {
