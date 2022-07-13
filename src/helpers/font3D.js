@@ -33,7 +33,6 @@ export function font(scene, text, size, height, texture, position, rotation){
             text3D.position.set(position.x, position.y, position.z)
             text3D.rotation.set(rotation.x, rotation.y, rotation.z)
 
-            console.log(text3D)
             scene.add(text3D)
         }
     )

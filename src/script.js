@@ -10,16 +10,14 @@ import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { gsap } from "gsap"
 import typefaceFont from 'three/examples/fonts/helvetiker_regular.typeface.json'
-// import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
-// import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import CircleType from 'circletype'
-// import LocomotiveScroll from "https://cdn.skypack.dev/locomotive-scroll"
 import LocomotiveScroll from 'locomotive-scroll'
 import cursorDot from 'cursor-dot'
 import * as Sticker from './helpers/sticker.js'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as Cursor from "./helpers/cursor.js"
 import * as Font3D from './helpers/font3D.js'
+import * as Curved from './helpers/curvedPlane.js'
 
 const scene = new THREE.Scene()
 // const gui = new GUI({
@@ -28,15 +26,10 @@ const scene = new THREE.Scene()
 
 const textureLoader = new THREE.TextureLoader()
 
-
-// const scroller = new LocomotiveScroll({
-//   el: document.querySelector("[data-scroll-section]"),
-//   smooth: true
-// });
 /**
  * Fonts
  */
-// const fontLoader = new FontLoader()
+Font3D.font(scene, 'WELCOME', 0.5, 0.2, '/textures/matcaps/8.png', {x: -3.13, y: 4.8, z: -2.61}, {x: 0, y: 2.6, z: 4.7})
 
 /**
  * Screen sizes
@@ -45,6 +38,16 @@ const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 }
+
+/**
+ * Camera
+ */
+const camera = new THREE.PerspectiveCamera(
+    75,
+    sizes.width / sizes.height,
+    0.1,
+    1000
+)
 
 window.addEventListener('resize', () =>
 {
@@ -66,40 +69,6 @@ window.addEventListener('resize', () =>
 */
 Cursor.cursorCustom()
 
-Font3D.font(scene, 'WELCOME', 0.5, 0.2, '/textures/matcaps/8.png', {x: -3.13, y: 4.8, z: -2.61}, {x: 0, y: 2.6, z: 4.7})
-
-// fontLoader.load(
-//     '/fonts/helvetiker_regular.typeface.json',
-//     (font) =>
-//     {
-//         const textGeometry = new TextGeometry(
-//             'WELCOME',
-//             {
-//                 font: font,
-//                 size: 0.5,
-//                 height: 0.2,
-//                 curveSegments: 12,
-//                 bevelEnabled: true,
-//                 bevelThickness: 0.03,
-//                 bevelSize: 0.02,
-//                 bevelOffset: 0,
-//                 bevelSegments: 5
-//             }
-//         )
-
-//         const matcapTexture = textureLoader.load('/textures/matcaps/8.png')
-//         const textMaterial = new THREE.MeshMatcapMaterial({matcap : matcapTexture})
-//         const text = new THREE.Mesh(textGeometry, textMaterial)
-
-//         // test disposition1 
-//         text.position.set(-3.13, 4.8, -2.61)
-//         text.rotation.y = 2.6
-//         text.rotation.z = 4.7
-
-//         scene.add(text)
-//     }
-// )
-
 /**
  * Image de fond
  */
@@ -109,7 +78,7 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 }
-console.log(getRandomInt(0, 20));
+
 const geometryImageFond = new THREE.PlaneGeometry(15, 10, 128, 128)
 // Material Image de fond 1
 const materialImageFond = new THREE.ShaderMaterial({
@@ -130,39 +99,6 @@ mesh.rotation.y = 0.66
 
 scene.add(mesh)
 
- /**************** Dynamic mesh ***************/
-const debugObject = {}
-/**
- * Water
- */
-// Geometry
-// const waterGeometry = new THREE.PlaneGeometry(10, 10, 512, 512)
-
-// Colors
-// debugObject.depthColor = '#186691'
-// debugObject.surfaceColor = '#9bd8ff'
-// debugObject.depthColor = '#fff'
-// debugObject.surfaceColor = '#000'
-
-// Mesh
-// const water = new THREE.Mesh(waterGeometry, waterMaterial)
-// water.rotation.x = - Math.PI * 0.5
-// water.position.y = 1
-// scene.add(water)
-
-// /**
-//  * Ground 
-//  */
-// const geometryCircle = new THREE.CircleGeometry( 5, 32 );
-// const materialCircle = new THREE.MeshStandardMaterial( { 
-//     color: 0xffffff,
-//     metalness: 0.6,
-//     emissive: 0xffffff
-//     // side: THREE.DoubleSide
-// } );
-// const circle = new THREE.Mesh( geometryCircle, materialCircle );
-// scene.add( circle );
-
 /**
  * 3D Model 
  */
@@ -173,48 +109,29 @@ let mixer;
 fbxLoader.load(
     'models/idle.fbx',
     (object) => {
-        // object.traverse(function (child) {
-        //     if (object.isMesh) {
-        //         // (child as THREE.Mesh).materialObj = materialObj
-        //         if ((child as THREE.Mesh).materialObj) {
-        //             ((child as THREE.Mesh).materialObj as THREE.MeshBasicMaterial).transparent = false
-        //         }
-        //     }
-        // })
-        // gltf.scene.scale.set(.1, .1, .1) // for the Fox
-   
-        // const action = mixerObj.clipAction(object.animations[0])
-        // action.play()
 
         object.traverse( function ( child ) {
 
-    if ( child.isMesh ) {
+            if ( child.isMesh ) {
+                const oldMat = child.material;
 
-         // switch the material here - you'll need to take the settings from the 
-         //original material, or create your own new settings, something like:
-        const oldMat = child.material;
+                // child.material = new THREE.MeshMatcapMaterial({ 
+                //     matcap: matcapTexture, 
+                //     // flatShading: true
+                //  })
 
-        // child.material = new THREE.MeshMatcapMaterial({ 
-        //     matcap: matcapTexture, 
-        //     // flatShading: true
-        //  })
-
-        child.material = new THREE.MeshNormalMaterial( {  
-        //    metalness: 1,
-           flatShading: true
-        } );
-
-    }
-
-  } );
+                child.material = new THREE.MeshNormalMaterial( {  
+                    //    metalness: 1,
+                    flatShading: true
+                });
+            }
+        });
 
         object.material = materialObj
-        console.log(object.animations);
         object.material = new THREE.MeshNormalMaterial()
 
         mixer = new THREE.AnimationMixer( object );
 	    let action = mixer.clipAction( (object).animations[0] );
-        console.log(action);
         action.play();
 
 
@@ -225,37 +142,22 @@ fbxLoader.load(
 
         scene.add(object)
     },
-    (xhr) => {
-        console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-    },
+    // (xhr) => {
+    //     console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
+    // },
     // (error) => {
     //     console.log(error)
     // }
 )
 
-// scene.background = new THREE.Color( '#fff' );
 scene.background = new THREE.Color( '#21272D' );
 
 
-// var bgTexture = new THREE.Color( '#21272D' );
-// // bgTexture.minFilter = THREE.LinearFilter;
-// // scene.background = bgTexture;
-
-// const geometryBackground = new THREE.CylinderGeometry( 5, 5, 20, 45, 35 );
-// const materialBackground = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-// const cylinderBackground = new THREE.Mesh( geometry, material );
-// scene.add( cylinderBackground );
-
-
-const gridHelper = new THREE.GridHelper(100, 100, 0xaec6cf, 0xaec6cf)
+/**
+ * Scene helper
+ */
+// const gridHelper = new THREE.GridHelper(100, 100, 0xaec6cf, 0xaec6cf)
 // scene.add(gridHelper)
-
-const camera = new THREE.PerspectiveCamera(
-    75,
-    sizes.width / sizes.height,
-    0.1,
-    1000
-)
 
 /**
  * Curved plane
@@ -280,217 +182,68 @@ aproposPicture.position.set(-1.31, 2.86, -1.83)
 scene.add( aproposPicture );
 
 // FeelinFood
-var feelinMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/feelinFood.jpg'),
-  side: THREE.DoubleSide
-});
-
-const projectPicture1 = new THREE.Mesh( geometryCylinder, feelinMaterial );
-projectPicture1.rotation.y = 4.68
-projectPicture1.position.set(0, 4.42, 1.3)
-scene.add( projectPicture1 );
+const projectPicture1 = Curved.pictures(scene, 'images/feelinFood.jpg', 4.68, {x:0, y:4.42, z:1.3})
 
 // ColorFoot
-var colorFootMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/colorFoot.png'),
-  side: THREE.DoubleSide
-});
-const projectPicture2 = new THREE.Mesh( geometryCylinder, colorFootMaterial );
-projectPicture2.rotation.y = 5.1
-projectPicture2.position.set(0.26, 4.9, 1.3)
-scene.add( projectPicture2 );
+const projectPicture2 = Curved.pictures(scene, 'images/colorFoot.png', 5.1, {x:0.26, y:4.9, z:1.3})
 
 // School&U
-var schoolMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/school.jpg'),
-  side: THREE.DoubleSide
-});
-
-const projectPicture3 = new THREE.Mesh( geometryCylinder, schoolMaterial );
-projectPicture3.rotation.y = 5.2
-projectPicture3.position.set(0.52, 5.38, 1.3)
-scene.add( projectPicture3 );
+const projectPicture3 = Curved.pictures(scene, 'images/school.jpg', 5.2, {x:0.52, y:5.38, z:1.3})
 
 // AeroBay
-var aeroMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/aerobay.png'),
-  side: THREE.DoubleSide
-});
-
-const projectPicture4 = new THREE.Mesh( geometryCylinder, aeroMaterial );
-projectPicture4.rotation.y = 5.45
-projectPicture4.position.set(0.9, 5.87, 1.04)
-scene.add( projectPicture4 );
+const projectPicture4 = Curved.pictures(scene, 'images/aerobay.png', 5.45, {x:0.9, y:5.87, z:1.04})
 
 // Forum 
-var forumMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/forum.png'), 
-  side: THREE.DoubleSide
-});
-
-const projectPicture5 = new THREE.Mesh( geometryCylinder, forumMaterial );
-projectPicture5.rotation.y = 5.8
-projectPicture5.position.set(0.9, 5.38, 1.04)
-scene.add( projectPicture5 );
+const projectPicture5 = Curved.pictures(scene, 'images/forum.png', 5.8, {x:0.9, y:5.38, z:1.04})
 
 // FoodCulture Street
-var fcsMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/fcs.png'), 
-  side: THREE.DoubleSide
-});
-
-const projectPicture6 = new THREE.Mesh( geometryCylinder, fcsMaterial );
-projectPicture6.rotation.y = 5.5
-projectPicture6.position.set(0.78, 4.9, 1.04)
-scene.add( projectPicture6 );
-
+const projectPicture6 = Curved.pictures(scene, 'images/fcs.png', 5.5, {x:0.78, y:4.9, z:1.04})
 
 
 // Autriche
-var montagneMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/Hobbies/montagne2.png'),
-  side: THREE.DoubleSide
-});
-const hobbiesPicture1 = new THREE.Mesh( geometryCylinder, montagneMaterial );
-hobbiesPicture1.rotation.y = 6.7
-hobbiesPicture1.position.set(1.3, 6.6, 0)
-scene.add( hobbiesPicture1 );
+const hobbiesPicture1 = Curved.pictures(scene, 'images/Hobbies/montagne2.png', 6.7, {x:1.3, y:6.6, z:0})
 
 // Madere
-var madereMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/Hobbies/madere1.png'),
-  side: THREE.DoubleSide
-});
-const hobbiesPicture2 = new THREE.Mesh( geometryCylinder, madereMaterial );
-hobbiesPicture2.rotation.y = 7.03
-hobbiesPicture2.position.set(1.1, 7.1, -0.26)
-scene.add( hobbiesPicture2 );
+const hobbiesPicture2 = Curved.pictures(scene, 'images/Hobbies/madere1.png', 7.03, {x:1.1, y:7.1, z:-0.26})
 
 // Maroc
-var marocMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/Hobbies/maroc3.png'),
-  side: THREE.DoubleSide
-});
-const hobbiesPicture3 = new THREE.Mesh( geometryCylinder, marocMaterial );
-hobbiesPicture3.rotation.y = 7.2
-hobbiesPicture3.position.set(0.9, 7.6, -0.4)
-scene.add( hobbiesPicture3 );
-
-// Vietnam
-var vietnamMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/Hobbies/vietnam.png'),
-  side: THREE.DoubleSide
-});
-const hobbiesPicture6 = new THREE.Mesh( geometryCylinder, vietnamMaterial );
-hobbiesPicture6.rotation.y = 7.2
-hobbiesPicture6.position.set(1.07, 8.08, -0.2)
-scene.add( hobbiesPicture6 );
+const hobbiesPicture3 = Curved.pictures(scene, 'images/Hobbies/maroc3.png', 7.2, {x:0.9, y:7.6, z:-0.4})
 
 // Madere
-var tenteMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/Hobbies/montagne6.jpg'), 
-  side: THREE.DoubleSide
-});
-const hobbiesPicture4 = new THREE.Mesh( geometryCylinder, tenteMaterial );
-hobbiesPicture4.rotation.y = 6.7
-hobbiesPicture4.position.set(1.3, 7.1, 0.3)
-scene.add( hobbiesPicture4 );
+const hobbiesPicture4 = Curved.pictures(scene, 'images/Hobbies/montagne6.jpg', 6.7, {x:1.3, y:7.1, z:0.3})
 
 // Lozere
-var lozereMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/Hobbies/lozere1.png'),
-  side: THREE.DoubleSide
-});
-const hobbiesPicture5 = new THREE.Mesh( geometryCylinder, lozereMaterial );
-hobbiesPicture5.rotation.y = 6.9
-hobbiesPicture5.position.set(1.2, 7.6, 0.1)
-scene.add( hobbiesPicture5 );
+const hobbiesPicture5 = Curved.pictures(scene, 'images/Hobbies/lozere1.png', 6.9, {x:1.2, y:7.6, z:0.1})
+
+// Vietnam
+const hobbiesPicture6 = Curved.pictures(scene, 'images/Hobbies/vietnam.png', 7.2, {x:1.07, y:8.08, z:-0.2})
+
 
 // OpenClassRooms
-var openMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/School/open.png'),
-  side: THREE.DoubleSide
-});
-const formationsPicture12 = new THREE.Mesh( geometryCylinder, openMaterial );
-formationsPicture12.rotation.y = 7.8
-formationsPicture12.position.set(-0.4, 8.27, -0.7)
-scene.add( formationsPicture12 );
+const formationsPicture12 = Curved.pictures(scene, 'images/School/open.png', 7.8, {x:-0.4, y:8.27, z:-0.7})
 
 // ESIEE [it]
-var esieeMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/School/esiee.png'),
-  side: THREE.DoubleSide
-});
-const formationsPicture2 = new THREE.Mesh( geometryCylinder, esieeMaterial );
-formationsPicture2.rotation.y = 8.33
-formationsPicture2.position.set(-0.52, 8.85, -0.79)
-scene.add( formationsPicture2 );
+const formationsPicture2 = Curved.pictures(scene, 'images/School/esiee.png', 8.33, {x:-0.52, y:8.85, z:-0.79})
 
 // Sorbonne
-var sorbonneMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/School/sorbonne.png'),
-  side: THREE.DoubleSide
-});
-const formationsPicture1 = new THREE.Mesh( geometryCylinder, sorbonneMaterial );
-formationsPicture1.rotation.y = 8.5
-formationsPicture1.position.set(-0.79, 9.4, -0.7)
-scene.add( formationsPicture1 ); 
-
-        // gui.add(formationsPicture1.position, 'x').min(-40).max(40).step(0.01).name('Cube x')
-        // gui.add(formationsPicture1.position, 'y').min(-40).max(40).step(0.01).name('Cube y')
-        // gui.add(formationsPicture1.position, 'z').min(-40).max(40).step(0.01).name('Cube z')
-        // gui.add(formationsPicture1.rotation, 'y').min(-40).max(40).step(0.01).name('Cube z')
+const formationsPicture1 = Curved.pictures(scene, 'images/School/sorbonne.png', 8.5, {x:-0.79, y:9.4, z:-0.7})
 
 
 // JS
-var jsMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/Langage/js.png'),
-//   side: THREE.DoubleSide
-});
-const formationsPicture6 = new THREE.Mesh( geometryCylinderLangage, jsMaterial );
-formationsPicture6.rotation.y = 11.4
-formationsPicture6.position.set(0.4, 11.27, 0.45)
-scene.add( formationsPicture6 );
+const formationsPicture6 = Curved.square(scene, 'images/Langage/js.png', 11.4, {x:0.4, y:11.27, z:0.45})
 
 // Three
-var threeMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/Langage/three.png'),
-//   side: THREE.DoubleSide
-});
-const formationsPicture7 = new THREE.Mesh( geometryCylinderLangage, threeMaterial );
-formationsPicture7.rotation.y = 11.47
-formationsPicture7.position.set(0.84, 11.28, 0.2)
-scene.add( formationsPicture7 );
+const formationsPicture7 = Curved.square(scene, 'images/Langage/three.png', 11.47, {x:0.84, y:11.28, z:0.2})
 
 // React
-var reactMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/Langage/react.png'),
-//   side: THREE.DoubleSide
-});
-const formationsPicture8 = new THREE.Mesh( geometryCylinderLangage, reactMaterial );
-formationsPicture8.rotation.y = 11.47
-formationsPicture8.position.set(0.08, 10.8, 0.6)
-scene.add( formationsPicture8 );
+const formationsPicture8 = Curved.square(scene, 'images/Langage/react.png', 11.47, {x:0.08, y:10.8, z:0.6})
 
 // XR
-var xrMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/Langage/xr.png'),
-//   side: THREE.DoubleSide
-});
-const formationsPicture9 = new THREE.Mesh( geometryCylinderLangage, xrMaterial );
-formationsPicture9.rotation.y = 11.47
-formationsPicture9.position.set(0.54, 10.8, 0.3)
-scene.add( formationsPicture9 );
+const formationsPicture9 = Curved.square(scene, 'images/Langage/xr.png', 11.47, {x:0.54, y:10.8, z:0.3})
 
 // PHP
-var phpMaterial = new THREE.MeshLambertMaterial({
-  map: loaderTab.load('images/Langage/php.png'),
-//   side: THREE.DoubleSide
-});
-const formationsPicture10 = new THREE.Mesh( geometryCylinderLangage, phpMaterial );
-formationsPicture10.rotation.y = 11.4
-formationsPicture10.position.set(1.05, 10.8, 0.05)
-scene.add( formationsPicture10 );
+const formationsPicture10 = Curved.square(scene, 'images/Langage/php.png', 11.4, {x:1.05, y:10.8, z:0.05})
+
 
 const renderer = new THREE.WebGLRenderer()
 renderer.shadowMap.enabled = true
@@ -531,6 +284,8 @@ const plane = new THREE.Mesh( geometryPlane, materialPlane );
 plane.position.set(0, 1.5, -6)
 plane.rotation.y = 3
 
+scene.add( plane );
+
 /**
  * Animated text
  */
@@ -548,52 +303,24 @@ document.body.addEventListener("mousemove", e => {
 });
 
 // animated topbar menu 
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// gsap.to("#specialSkills", {
-//     scrollTrigger: "#specialSkills", 
-//     x: 500
-// })
-// ScrollTrigger.create({
-//   trigger: "#topBarMenu",
-//   pin: true, 
-//   start: "#arrowID",
-//   endTrigger: "#specialSkills",
-//   end: "-=9000px",
-//   scrub: 1, 
-//   onToggle: self => console.log("toggled, isActive:", self.isActive),
-//   onUpdate: self => {
-//     console.log("progress:", self.progress.toFixed(3), "direction:", self.direction, "velocity", self.getVelocity());
-//   }
-// });
 const stickyMenu = document.getElementById("topBarMenu")
 window.addEventListener("scroll", function(){
 const scroll = window.scrollY
-console.log(scroll)
 	if(scroll <= 300){
         stickyMenu.style.visibility = "hidden";
 	}
 	else{
-        // stickyMenu.style.display = "block"
-        // console.log('top')
         stickyMenu.style.visibility = "visible";
-        // stickyMenu.style.visibility= "visible"
         stickyMenu.style.position = "sticky"
 	}
 }, false);
 
-// A propos 
-scene.add( plane );
 
 // Cubes 
 const geometryCube = new THREE.BoxGeometry( 0.3, 0.3, 0.3 );
 const materialCube = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
 const cube = new THREE.Mesh( geometryCube, materialCube );
 const cube1 = new THREE.Mesh( geometryCube, materialCube );
-// const cube2 = new THREE.Mesh( geometryCube, materialCube );
-// const cube3 = new THREE.Mesh( geometryCube, materialCube );
-// const cube4 = new THREE.Mesh( geometryCube, materialCube );
 cube.position.set(-0.9 ,3.2, -0.2)
 
 // scene.add( cube );
@@ -786,6 +513,7 @@ animationScripts.push({
         camera.position.z = lerp(-8, -1.5, scalePercent(10, 20))
         camera.position.y = lerp(1.5, 3, scalePercent(10, 20))
         camera.rotation.y = lerp(3, 4.5, scalePercent(10, 20))
+        plane.position.y = lerp(40, 60, scalePercent(10, 20))
     },
 })
 // mesh.rotation.y = 0.65
@@ -1026,7 +754,7 @@ function animate() {
 
     playScrollAnimations()
 
-    gsap.delayedCall(0.9, ()=>{
+    gsap.delayedCall(1.2, ()=>{
         mixer.update(clock.getDelta())
     })
 
@@ -1069,10 +797,6 @@ function render() {
     light4.position.y = Math.sin(elapsedTime * 2)
 
 }
-
-//    gui.add(mesh.position, 'x').min(-20).max(20).step(0.01).name('Plane2 z')
-//         gui.add(mesh.position, 'y').min(-20).max(20).step(0.01).name('Plane8 y')
-//         gui.add(mesh.position, 'z').min(-20).max(20).step(0.01).name('Plane8 y')
 
 window.scrollTo({ top: 0, behavior: 'smooth' })
 animate()
