@@ -10,17 +10,22 @@ import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { gsap } from "gsap"
 import typefaceFont from 'three/examples/fonts/helvetiker_regular.typeface.json'
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
+// import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
+// import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import CircleType from 'circletype'
 // import LocomotiveScroll from "https://cdn.skypack.dev/locomotive-scroll"
 import LocomotiveScroll from 'locomotive-scroll'
 import cursorDot from 'cursor-dot'
+import * as Sticker from './helpers/sticker.js'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import * as Cursor from "./helpers/cursor.js"
+import * as Font3D from './helpers/font3D.js'
 
 const scene = new THREE.Scene()
 // const gui = new GUI({
 //     width: 400
 // })
+
 const textureLoader = new THREE.TextureLoader()
 
 
@@ -31,7 +36,7 @@ const textureLoader = new THREE.TextureLoader()
 /**
  * Fonts
  */
-const fontLoader = new FontLoader()
+// const fontLoader = new FontLoader()
 
 /**
  * Screen sizes
@@ -59,125 +64,41 @@ window.addEventListener('resize', () =>
 /**
  * Cursor
 */
-const cursor = cursorDot({
-    zIndex: 999999,
-    diameter: 40,
-    borderWidth: 2,
-    borderColor: '#fff',
-    easing: 4,
-    background: 'rgb(255, 255, 255, 0.15)', 
-    position: 'absolute'
-})
+Cursor.cursorCustom()
 
-const cursorSmall = cursorDot({
-    zIndex: 999999,
-    diameter: 30,
-    borderWidth: 1,
-    borderColor: 'transparent',
-    easing: 4,
-    background: 'rgb(255, 255, 255, 0.40)', 
-    position: 'absolute',
+Font3D.font(scene, 'WELCOME', 0.5, 0.2, '/textures/matcaps/8.png', {x: -3.13, y: 4.8, z: -2.61}, {x: 0, y: 2.6, z: 4.7})
 
-})
+// fontLoader.load(
+//     '/fonts/helvetiker_regular.typeface.json',
+//     (font) =>
+//     {
+//         const textGeometry = new TextGeometry(
+//             'WELCOME',
+//             {
+//                 font: font,
+//                 size: 0.5,
+//                 height: 0.2,
+//                 curveSegments: 12,
+//                 bevelEnabled: true,
+//                 bevelThickness: 0.03,
+//                 bevelSize: 0.02,
+//                 bevelOffset: 0,
+//                 bevelSegments: 5
+//             }
+//         )
 
+//         const matcapTexture = textureLoader.load('/textures/matcaps/8.png')
+//         const textMaterial = new THREE.MeshMatcapMaterial({matcap : matcapTexture})
+//         const text = new THREE.Mesh(textGeometry, textMaterial)
 
-cursor.over("li", {
-   background: "rgba(255,255,255,.20)", 
-});
+//         // test disposition1 
+//         text.position.set(-3.13, 4.8, -2.61)
+//         text.rotation.y = 2.6
+//         text.rotation.z = 4.7
 
-// fin test cursor 
-
-
-
-fontLoader.load(
-    '/fonts/helvetiker_regular.typeface.json',
-    (font) =>
-    {
-        const textGeometry = new TextGeometry(
-            'WELCOME',
-            {
-                font: font,
-                size: 0.5,
-                height: 0.2,
-                curveSegments: 12,
-                bevelEnabled: true,
-                bevelThickness: 0.03,
-                bevelSize: 0.02,
-                bevelOffset: 0,
-                bevelSegments: 5
-            }
-        )
-        // const textGeometry1 = new TextGeometry(
-        //     'CO',
-        //     {
-        //         font: font,
-        //         size: 0.5,
-        //         height: 0.2,
-        //         curveSegments: 12,
-        //         bevelEnabled: true,
-        //         bevelThickness: 0.03,
-        //         bevelSize: 0.02,
-        //         bevelOffset: 0,
-        //         bevelSegments: 5
-        //     }
-        // )
-        // const textGeometry2 = new TextGeometry(
-        //     'ME',
-        //     {
-        //         font: font,
-        //         size: 0.5,
-        //         height: 0.2,
-        //         curveSegments: 12,
-        //         bevelEnabled: true,
-        //         bevelThickness: 0.03,
-        //         bevelSize: 0.02,
-        //         bevelOffset: 0,
-        //         bevelSegments: 5
-        //     }
-        // )
-        // const textGeometry3 = new TextGeometry(
-        //     '!',
-        //     {
-        //         font: font,
-        //         size: 0.8,
-        //         height: 0.2,
-        //         curveSegments: 12,
-        //         bevelEnabled: true,
-        //         bevelThickness: 0.03,
-        //         bevelSize: 0.02,
-        //         bevelOffset: 0,
-        //         bevelSegments: 5
-        //     }
-        // )
-        const matcapTexture = textureLoader.load('/textures/matcaps/8.png')
-        const textMaterial = new THREE.MeshMatcapMaterial({matcap : matcapTexture})
-        const text = new THREE.Mesh(textGeometry, textMaterial)
-        // const text1 = new THREE.Mesh(textGeometry1, textMaterial)
-        // const text2 = new THREE.Mesh(textGeometry2, textMaterial)
-        // const text3 = new THREE.Mesh(textGeometry3, textMaterial)
-
-        // test disposition1 
-        text.position.set(-3.13, 4.8, -2.61)
-        text.rotation.y = 2.6
-        text.rotation.z = 4.7
-
-        // test disposition2 
-        // text.position.set(-1.31, 1.4, -4.7)
-        // text1.position.set(-1.4, 0.78, -4.69)
-        // text2.position.set(-1.31, 0.2, -4.95)
-        // text3.position.set(-2.4, 0.3, -5.25)
-        // text.rotation.y = 2.7
-        // text1.rotation.y = 2.7
-        // text2.rotation.y = 2.7
-        // text3.rotation.y = 2.7
-        // text1.rotation.z = 1.6
-
-        scene.add(text)
-        // scene.add(text1)
-        // scene.add(text2)
-        // scene.add(text3)
-    }
-)
+//         scene.add(text)
+//     }
+// )
 
 /**
  * Image de fond
@@ -206,10 +127,7 @@ const materialImageFond = new THREE.ShaderMaterial({
 const mesh = new THREE.Mesh(geometryImageFond, materialImageFond)
 mesh.position.set(0.26, 11.45, 4.94)
 mesh.rotation.y = 0.66
-        // gui.add(mesh.position, 'x').min(-40).max(40).step(0.01).name('Cube x')
-        // gui.add(mesh.position, 'y').min(-40).max(40).step(0.01).name('Cube y')
-        // gui.add(mesh.position, 'z').min(-40).max(40).step(0.01).name('Cube z')
-        // gui.add(mesh.rotation, 'y').min(-40).max(40).step(0.01).name('Cube z')
+
 scene.add(mesh)
 
  /**************** Dynamic mesh ***************/
@@ -226,33 +144,11 @@ const debugObject = {}
 // debugObject.depthColor = '#fff'
 // debugObject.surfaceColor = '#000'
 
-// gui.addColor(debugObject, 'depthColor').onChange(() => { waterMaterial.uniforms.uDepthColor.value.set(debugObject.depthColor) })
-// gui.addColor(debugObject, 'surfaceColor').onChange(() => { waterMaterial.uniforms.uSurfaceColor.value.set(debugObject.surfaceColor) })
-
-
-// gui.add(waterMaterial.uniforms.uBigWavesElevation, 'value').min(0).max(1).step(0.001).name('uBigWavesElevation')
-// gui.add(waterMaterial.uniforms.uBigWavesFrequency.value, 'x').min(0).max(10).step(0.001).name('uBigWavesFrequencyX')
-// gui.add(waterMaterial.uniforms.uBigWavesFrequency.value, 'y').min(0).max(10).step(0.001).name('uBigWavesFrequencyY')
-// gui.add(waterMaterial.uniforms.uBigWavesSpeed, 'value').min(0).max(4).step(0.001).name('uBigWavesSpeed')
-
-
-// gui.add(waterMaterial.uniforms.uSmallWavesElevation, 'value').min(0).max(1).step(0.001).name('uSmallWavesElevation')
-// gui.add(waterMaterial.uniforms.uSmallWavesFrequency, 'value').min(0).max(30).step(0.001).name('uSmallWavesFrequency')
-// gui.add(waterMaterial.uniforms.uSmallWavesSpeed, 'value').min(0).max(4).step(0.001).name('uSmallWavesSpeed')
-// gui.add(waterMaterial.uniforms.uSmallIterations, 'value').min(0).max(5).step(1).name('uSmallIterations')
-
-// gui.add(waterMaterial.uniforms.uColorOffset, 'value').min(0).max(1).step(0.001).name('uColorOffset')
-// gui.add(waterMaterial.uniforms.uColorMultiplier, 'value').min(0).max(10).step(0.001).name('uColorMultiplier')
-
 // Mesh
 // const water = new THREE.Mesh(waterGeometry, waterMaterial)
 // water.rotation.x = - Math.PI * 0.5
 // water.position.y = 1
 // scene.add(water)
-
-        // gui.add(water.rotation, 'x').min(-20).max(20).step(0.01).name('Plane2 z')
-        // gui.add(water.rotation, 'y').min(-20).max(20).step(0.01).name('Plane8 y')
-        // gui.add(water.rotation, 'z').min(-20).max(20).step(0.01).name('Plane8 y')
 
 // /**
 //  * Ground 
@@ -265,10 +161,6 @@ const debugObject = {}
 //     // side: THREE.DoubleSide
 // } );
 // const circle = new THREE.Mesh( geometryCircle, materialCircle );
-//         gui.add(circle.position, 'x').min(-20).max(20).step(0.01).name('Plane2 z')
-//         gui.add(circle.position, 'y').min(-20).max(20).step(0.01).name('Plane8 y')
-//         gui.add(circle.position, 'z').min(-20).max(20).step(0.01).name('Plane8 y')
-//         gui.add(circle.rotation, 'x').min(-20).max(20).step(0.01).name('Plane8 y')
 // scene.add( circle );
 
 /**
@@ -628,7 +520,7 @@ const material = new THREE.MeshBasicMaterial({
 // cube.position.set(0, 0.5, -10)
 // scene.add(cube)
 
-const geometryPlane = new THREE.PlaneGeometry( 12, 10 );
+const geometryPlane = new THREE.PlaneGeometry( 12, 40 );
 const geometryPlaneRect = new THREE.PlaneGeometry( 1, 2 );
 const geometryPlaneRectEcoles = new THREE.PlaneGeometry(3, 4);
 const geometryPlaneRectImageVideo = new THREE.PlaneGeometry(18, 10);
@@ -654,6 +546,42 @@ document.body.addEventListener("mousemove", e => {
     y: -y
   });
 });
+
+// animated topbar menu 
+
+// gsap.registerPlugin(ScrollTrigger);
+
+// gsap.to("#specialSkills", {
+//     scrollTrigger: "#specialSkills", 
+//     x: 500
+// })
+// ScrollTrigger.create({
+//   trigger: "#topBarMenu",
+//   pin: true, 
+//   start: "#arrowID",
+//   endTrigger: "#specialSkills",
+//   end: "-=9000px",
+//   scrub: 1, 
+//   onToggle: self => console.log("toggled, isActive:", self.isActive),
+//   onUpdate: self => {
+//     console.log("progress:", self.progress.toFixed(3), "direction:", self.direction, "velocity", self.getVelocity());
+//   }
+// });
+const stickyMenu = document.getElementById("topBarMenu")
+window.addEventListener("scroll", function(){
+const scroll = window.scrollY
+console.log(scroll)
+	if(scroll <= 300){
+        stickyMenu.style.visibility = "hidden";
+	}
+	else{
+        // stickyMenu.style.display = "block"
+        // console.log('top')
+        stickyMenu.style.visibility = "visible";
+        // stickyMenu.style.visibility= "visible"
+        stickyMenu.style.position = "sticky"
+	}
+}, false);
 
 // A propos 
 scene.add( plane );
@@ -1098,7 +1026,9 @@ function animate() {
 
     playScrollAnimations()
 
-    mixer.update(clock.getDelta())
+    gsap.delayedCall(0.9, ()=>{
+        mixer.update(clock.getDelta())
+    })
 
     render()
 }

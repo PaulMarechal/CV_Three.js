@@ -146,6 +146,15 @@ document.body.addEventListener("mousemove", e => {
   });
 });
 
+ScrollTrigger.create({
+      markers: true,
+      trigger: section,
+      start: () => "top top",
+      pin: true,
+      anticipatePin: 1,
+      //pinSpacing: true
+});
+
 /**
  * Experience
  */ 

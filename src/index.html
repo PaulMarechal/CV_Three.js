@@ -34,6 +34,8 @@
 <body>
     
     <span id="scrollProgress"></span>
+    <div id="home"></div>
+
     <!-- <header>
         <div class="placeholder-content">
             <div class="sticky-content">
@@ -51,7 +53,7 @@
     </header> -->
     <main>
         <div class="placeholder-content">
-        <div class="sticky-content">
+        <div class="sticky-content" id="topBarMenu">
             <div class="sticky-content-title">
                 <p><a href="#home">Home</a></p>
                 <p><a href="#specialSkills">Special Skills</a></p>
@@ -63,7 +65,6 @@
                 <p><a href="#contact_Me">Contact Me</a></p>
             </div>
         </div>
-        <div id="home"></div>
         <h1 class="mainTitle">MARÉCHAL<br>PAUL</h1>
         <section class="firstSection">
             <div class="welcomeText">
@@ -83,13 +84,21 @@
                     <li>LIVING IN PARIS</li>
                 </ul>
                 </div>
-                <svg class="arrow" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-down" width="170" height="170" viewBox="0 0 24 24" stroke-width="1.5" stroke="#21272D" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <div class="stickers">
+                    <img class="sticker sticker_quality" src="../static/images/stickers/quality.png" alt="Sticker vintage 'quality product' on homepage">
+                    <!-- <img class="sticker sticker_crazy" src="../static/images/stickers/crazy.png" alt="Sticker vintage 'crazy' on homepage"> -->
+                    <img class="sticker sticker_new" src="../static/images/stickers/new.png" alt="Sticker vintage 'new' on homepage">
+                    <!-- <img class="sticker sticker_front_end" src="../static/images/stickers/front_end.png" alt="Sticker vintage 'front-end' on homepage"> -->
+                </div>
+
+                <svg class="arrow" id="arrowID" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-down" width="170" height="170" viewBox="0 0 24 24" stroke-width="1.5" stroke="#21272D" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <line x1="12" y1="5" x2="12" y2="19" />
                     <line x1="16" y1="15" x2="12" y2="19" />
                     <line x1="8" y1="15" x2="12" y2="19" />
                 </svg>
             </div> 
+
             
         </section>
 

@@ -3,7 +3,6 @@
     src: url("https://res.cloudinary.com/holatresveces/raw/upload/v1573001944/MonumentExtended-Ultrabold_clzvv7.otf");
 }
 @font-face{
-
     font-family: "Quicksand";
     src : url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap');
 }
@@ -172,7 +171,7 @@ section {
     height: 70px;
     overflow: hidden;
     outline: 1px transparent;
-    margin-top: -21em;
+    margin-top: -20.5em;
     /* margin-top: -29.5%; */
     margin-left: 1.5em;
 
@@ -262,8 +261,49 @@ a:-webkit-any-link{
 }
 
 .arrow{
-    margin-top: 25%;
-    margin-left: 75%;
+    margin-top: 30%;
+    margin-left: 55%;
+    width: 30em;
+}
+
+.stickers{
+    position: relative;
+}
+
+img.sticker{
+    position: absolute;
+}
+
+.sticker_quality{
+    margin-left: 85%;
+    margin-top: 3%; 
+    width: 7em;
+    height: 5.5em;
+    transform : rotate(12deg);
+}
+
+/* .sticker_crazy{
+    margin-left: 90%;
+    margin-top: 4%;
+    width: 7em;
+    height: 4.5em;
+    transform : rotate(-15deg);
+}  */
+
+/* .sticker_front_end{
+    margin-left: 45%;
+    margin-top: 39%; 
+    width: 14em;
+    height: 3em;
+    transform : rotate(-5deg);
+} */
+
+.sticker_new{
+    margin-left: 79%;
+    margin-top: -2%;
+    width: 7em;
+    height: 6.5em;
+    transform : rotate(30deg);
 }
 
 *{
@@ -285,8 +325,10 @@ svg:hover {
     z-index: 12;
 }
 
-.sticky-content {
-    position: sticky;
+.sticky-content, #topBarMenu {
+    /* position: sticky; */
+    visibility: hidden;
+    /* display: none;  */
     top: 0.7em;
     z-index: 10;
     margin-top: 1em;
@@ -297,10 +339,12 @@ svg:hover {
     border-bottom: 0.05rem solid #dfdfdf80;
     height: 60px;
     margin: 0.5em 1em;
+    /* margin: 3em 1em; */
     border-radius: 10px;
 }
 .sticky-content-title {
     padding-top: 1rem;
+    z-index: 11;
     display: flex; 
     justify-content: space-between;
     font-size: 1.7em;
@@ -383,131 +427,7 @@ and (orientation : portrait) {
 
 }
 
-/* test */
-.main_h {
-    position: fixed;
-    max-height: 70px;
-    z-index: 999;
-    width: 100%;
-    padding-top: 17px;
-    background: none;
-    overflow: hidden;
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
-    opacity: 0;
-    top: -100px;
-    padding-bottom: 6px;
-    font-family: "Montserrat", sans-serif;
-  }
-  @media only screen and (max-width: 766px) {
-    .main_h {
-      padding-top: 25px;
-    }
-  }
   
-  .open-nav {
-    max-height: 400px !important;
-  }
-  .open-nav .mobile-toggle {
-    transform: rotate(-90deg);
-    -webkit-transform: rotate(-90deg);
-  }
-  
-  .sticky {
-    background-color: #fff;
-    opacity: 1;
-    top: 0px;
-    border-bottom: 1px solid gainsboro;
-  }
-  
-  .logo {
-    width: 50px;
-    font-size: 25px;
-    color: #8f8f8f;
-    text-transform: uppercase;
-    float: left;
-    display: block;
-    margin-top: 0;
-    line-height: 1;
-    margin-bottom: 10px;
-  }
-  @media only screen and (max-width: 766px) {
-    .logo {
-      float: none;
-    }
-  }
-  
-  nav {
-    float: right;
-    width: 60%;
-  }
-  @media only screen and (max-width: 766px) {
-    nav {
-      width: 100%;
-    }
-  }
-  nav ul {
-    list-style: none;
-    overflow: hidden;
-    text-align: right;
-    float: right;
-  }
-  @media only screen and (max-width: 766px) {
-    nav ul {
-      padding-top: 10px;
-      margin-bottom: 22px;
-      float: left;
-      text-align: center;
-      width: 100%;
-    }
-  }
-  nav ul li {
-    display: inline-block;
-    margin-left: 35px;
-    line-height: 1.5;
-  }
-  @media only screen and (max-width: 766px) {
-    nav ul li {
-      width: 100%;
-      padding: 7px 0;
-      margin: 0;
-    }
-  }
-  nav ul a {
-    color: #888888;
-    text-transform: uppercase;
-    font-size: 12px;
-  }
-  
-  .mobile-toggle {
-    display: none;
-    cursor: pointer;
-    font-size: 20px;
-    position: absolute;
-    right: 22px;
-    top: 0;
-    width: 30px;
-    -webkit-transition: all 200ms ease-in;
-    -moz-transition: all 200ms ease-in;
-    transition: all 200ms ease-in;
-  }
-
-  .mobile-toggle span {
-    width: 30px;
-    height: 4px;
-    margin-bottom: 6px;
-    border-radius: 1000px;
-    background: #8f8f8f;
-    display: block;
-  }
-  
-  .row {
-    width: 100%;
-    max-width: 940px;
-    margin: 0 auto;
-    position: relative;
-    padding: 0 2%;
-  }
 
 /* Version paysage - test sur iphoneXS */
 @media only screen 
