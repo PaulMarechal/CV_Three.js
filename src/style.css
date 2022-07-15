@@ -160,6 +160,12 @@ section {
     font-size: 10vh;
 }
 
+.contactMeStyle{
+    display: flex; 
+    justify-content: space-around; 
+    margin-left: -1em;
+}
+
 .liste{
     font-family: 'Quicksand', Courier, monospace;
     font-size: 2vh;

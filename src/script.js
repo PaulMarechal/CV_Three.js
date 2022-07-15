@@ -18,6 +18,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as Cursor from "./helpers/cursor.js"
 import * as Font3D from './helpers/font3D.js'
 import * as Curved from './helpers/curvedPlane.js'
+import * as Background from './helpers/background.js'
 
 const scene = new THREE.Scene()
 // const gui = new GUI({
@@ -115,13 +116,7 @@ fbxLoader.load(
             if ( child.isMesh ) {
                 const oldMat = child.material;
 
-                // child.material = new THREE.MeshMatcapMaterial({ 
-                //     matcap: matcapTexture, 
-                //     // flatShading: true
-                //  })
-
                 child.material = new THREE.MeshNormalMaterial( {  
-                    //    metalness: 1,
                     flatShading: true
                 });
             }
@@ -162,7 +157,6 @@ scene.background = new THREE.Color( '#21272D' );
 /**
  * Curved plane
  */
-
 const geometryCylinder = new THREE.CylinderGeometry( 0.65, 0.65, 0.42, 64, 25, 14, true, 1.1 );
 const geometryCylinderLangage = new THREE.CylinderGeometry( 0.42, 0.42, 0.42, 64, 25, 14, true, 1.1 );
 const materialCylinder = new THREE.MeshBasicMaterial( {
@@ -173,76 +167,13 @@ const materialCylinder = new THREE.MeshBasicMaterial( {
 /**
  * Pictures 
  */
-var loaderTab = new THREE.TextureLoader();
-
 // Photo de profil 
 const aproposPicture = new THREE.Mesh( geometryCylinder, materialCylinder );
 aproposPicture.rotation.y = 2.86
 aproposPicture.position.set(-1.31, 2.86, -1.83)
 scene.add( aproposPicture );
 
-// FeelinFood
-const projectPicture1 = Curved.pictures(scene, 'images/feelinFood.jpg', 4.68, {x:0, y:4.42, z:1.3})
-
-// ColorFoot
-const projectPicture2 = Curved.pictures(scene, 'images/colorFoot.png', 5.1, {x:0.26, y:4.9, z:1.3})
-
-// School&U
-const projectPicture3 = Curved.pictures(scene, 'images/school.jpg', 5.2, {x:0.52, y:5.38, z:1.3})
-
-// AeroBay
-const projectPicture4 = Curved.pictures(scene, 'images/aerobay.png', 5.45, {x:0.9, y:5.87, z:1.04})
-
-// Forum 
-const projectPicture5 = Curved.pictures(scene, 'images/forum.png', 5.8, {x:0.9, y:5.38, z:1.04})
-
-// FoodCulture Street
-const projectPicture6 = Curved.pictures(scene, 'images/fcs.png', 5.5, {x:0.78, y:4.9, z:1.04})
-
-
-// Autriche
-const hobbiesPicture1 = Curved.pictures(scene, 'images/Hobbies/montagne2.png', 6.7, {x:1.3, y:6.6, z:0})
-
-// Madere
-const hobbiesPicture2 = Curved.pictures(scene, 'images/Hobbies/madere1.png', 7.03, {x:1.1, y:7.1, z:-0.26})
-
-// Maroc
-const hobbiesPicture3 = Curved.pictures(scene, 'images/Hobbies/maroc3.png', 7.2, {x:0.9, y:7.6, z:-0.4})
-
-// Madere
-const hobbiesPicture4 = Curved.pictures(scene, 'images/Hobbies/montagne6.jpg', 6.7, {x:1.3, y:7.1, z:0.3})
-
-// Lozere
-const hobbiesPicture5 = Curved.pictures(scene, 'images/Hobbies/lozere1.png', 6.9, {x:1.2, y:7.6, z:0.1})
-
-// Vietnam
-const hobbiesPicture6 = Curved.pictures(scene, 'images/Hobbies/vietnam.png', 7.2, {x:1.07, y:8.08, z:-0.2})
-
-
-// OpenClassRooms
-const formationsPicture12 = Curved.pictures(scene, 'images/School/open.png', 7.8, {x:-0.4, y:8.27, z:-0.7})
-
-// ESIEE [it]
-const formationsPicture2 = Curved.pictures(scene, 'images/School/esiee.png', 8.33, {x:-0.52, y:8.85, z:-0.79})
-
-// Sorbonne
-const formationsPicture1 = Curved.pictures(scene, 'images/School/sorbonne.png', 8.5, {x:-0.79, y:9.4, z:-0.7})
-
-
-// JS
-const formationsPicture6 = Curved.square(scene, 'images/Langage/js.png', 11.4, {x:0.4, y:11.27, z:0.45})
-
-// Three
-const formationsPicture7 = Curved.square(scene, 'images/Langage/three.png', 11.47, {x:0.84, y:11.28, z:0.2})
-
-// React
-const formationsPicture8 = Curved.square(scene, 'images/Langage/react.png', 11.47, {x:0.08, y:10.8, z:0.6})
-
-// XR
-const formationsPicture9 = Curved.square(scene, 'images/Langage/xr.png', 11.47, {x:0.54, y:10.8, z:0.3})
-
-// PHP
-const formationsPicture10 = Curved.square(scene, 'images/Langage/php.png', 11.4, {x:1.05, y:10.8, z:0.05})
+Curved.allCurvedPictures(scene)
 
 
 const renderer = new THREE.WebGLRenderer()
@@ -252,10 +183,6 @@ renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
 const geometry = new THREE.BoxGeometry()
-// const material = new THREE.MeshBasicMaterial({
-//     color: 0xffffff
-//     wireframe: true,
-// })
 
 // Textures 
 const gradientTexture = textureLoader.load('textures/gradients/5.jpg')
@@ -263,20 +190,13 @@ gradientTexture.magFilter = THREE.NearestFilter
 
 // material
 const material = new THREE.MeshBasicMaterial({
-    // color: parameters.materialColor, 
-    color: 0xfffffe, 
-    // gradientMap: gradientTexture
-    
+    color: 0xfffffe,   
 })
 
-// const cube = new THREE.Mesh(geometry, material)
-// cube.position.set(0, 0.5, -10)
-// scene.add(cube)
-
 const geometryPlane = new THREE.PlaneGeometry( 12, 40 );
-const geometryPlaneRect = new THREE.PlaneGeometry( 1, 2 );
-const geometryPlaneRectEcoles = new THREE.PlaneGeometry(3, 4);
-const geometryPlaneRectImageVideo = new THREE.PlaneGeometry(18, 10);
+// const geometryPlaneRect = new THREE.PlaneGeometry( 1, 2 );
+// const geometryPlaneRectEcoles = new THREE.PlaneGeometry(3, 4);
+// const geometryPlaneRectImageVideo = new THREE.PlaneGeometry(18, 10);
 
 const materialPlane = new THREE.MeshBasicMaterial( {color: 0xffffff} );
 
@@ -316,29 +236,21 @@ const scroll = window.scrollY
 }, false);
 
 
-// Cubes 
-const geometryCube = new THREE.BoxGeometry( 0.3, 0.3, 0.3 );
-const materialCube = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-const cube = new THREE.Mesh( geometryCube, materialCube );
-const cube1 = new THREE.Mesh( geometryCube, materialCube );
-cube.position.set(-0.9 ,3.2, -0.2)
-
+// Cubes ( help for camera position)
+// const geometryCube = new THREE.BoxGeometry( 0.3, 0.3, 0.3 );
+// const materialCube = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+// const cube = new THREE.Mesh( geometryCube, materialCube );
+// cube.position.set(-0.9 ,3.2, -0.2)
 // scene.add( cube );
 
 /**
  * Background
  */
-const options = {
-    enableSwoopingCamera: false,
-    enableRotation: true,
-    transmission: 1,
-    thickness: 0,
-    roughness: 0.67,
-    envMapIntensity: 1.5,
-    clearcoat: 1,
-    clearcoatRoughness: 0.12
-}
+Background.backgroundScene(scene, {x: 0, y:0.65, z:0}, 13, 13, 35, 45, 35, {x: 0, y: -4, z: 0});
 
+/**
+ * Transparent cube
+ */
 const optionsCube = {
     enableSwoopingCamera: false,
     enableRotation: true,
@@ -350,48 +262,6 @@ const optionsCube = {
     clearcoatRoughness: 0.12
 }
 
-// const bgTexture = new THREE.TextureLoader().load("images/textureFond.jpg");
-// const bgGeometry = new THREE.PlaneGeometry(5, 5);
-// const bgMaterial = new THREE.MeshBasicMaterial({ map: bgTexture });
-// const bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
-// bgMesh.position.set(0, 3, -1);
-
-// scene.add(bgMesh);
-
-const positionsTest = [
-    [0, 0.65, 0],
-];
-
-const geometriesTest = [
-    new THREE.CylinderGeometry( 13, 13, 35, 45, 35 )
-    // new THREE.IcosahedronGeometry(0.67, 24), // Sphere
-];
-
-const materialTest = new THREE.MeshPhysicalMaterial({
-    transmission: options.transmission,
-    thickness: options.thickness,
-    roughness: options.roughness,
-    envMapIntensity: options.envMapIntensity,
-    clearcoat: options.clearcoat,
-    clearcoatRoughness: options.clearcoatRoughness,
-    side: THREE.DoubleSide
-});
-
-const meshesTest = geometriesTest.map(
-    (geometry) => new THREE.Mesh(geometry, materialTest)
-);
-
-meshesTest.forEach((mesh, i) => {
-    scene.add(mesh);
-    mesh.position.set(...positionsTest[i]);
-});
-
-geometry.rotateX(Math.PI / 2);
-geometry.translate(0, -4, 0);
-
-/**
- * Transparent cube
- */
 const positionsTestCube = [
     [-1.7, 3.2, -1.1],
     [-1.2, 3.5, -0.4],
@@ -465,7 +335,7 @@ function scalePercent(start, end) {
 }
 
 /**
- * Lights ( background of scene )
+ * Moving Lights ( background of scene )
  */
 const light1 = new THREE.PointLight('#ff00ff', 16, 12)
 scene.add(light1)
@@ -490,7 +360,6 @@ animationScripts.push({
         if (g <= 0) {
             g = 1.0
         }
-        // material.color.g = g
     },
 })
 
@@ -653,14 +522,13 @@ const particlesGeometry = new THREE.BufferGeometry()
 particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
 
 // Material 
-// Ta have round particles 
 function createCircleTexture(color, size) {
   var matCanvas = document.createElement('canvas');
   matCanvas.width = matCanvas.height = size;
   var matContext = matCanvas.getContext('2d');
-  // create texture object from canvas.
+  // Create texture object from canvas
   var texture = new THREE.Texture(matCanvas);
-  // Draw a circle
+  // Draw circle
   var center = size / 2;
   matContext.beginPath();
   matContext.arc(center, center, size/2, 0, 2 * Math.PI, false);
@@ -675,10 +543,7 @@ function createCircleTexture(color, size) {
 
 // Particles material with round particles function ( createCircleTexture )
 const particlesMaterial = new THREE.PointsMaterial({
-    // color: parameters.materialColor, 
-    // color: 0x000000,
     sizeAttenuation: true, 
-    // size: 0.04
     map: createCircleTexture('#ffffff', 256),
     size: 0.04,
     transparent: true,
@@ -725,9 +590,6 @@ const firefliesMaterial = new THREE.ShaderMaterial({
     depthWrite: false
 })
 
-// GUI Fireflies 
-// gui.add(firefliesMaterial.uniforms.uSize, 'value').min(0).max(500).step(1).name('fireflies Size')
-
 // Points 
 const fireflies = new THREE.Points(firefliesGeometry, firefliesMaterial)
 scene.add(fireflies)
@@ -741,9 +603,6 @@ scene.add(ambientLight)
 const clock = new THREE.Clock()
 
 function animate() {
-    // const elapsedTime = clock.getElapsedTime()
-    // cube.rotation.x += 0.007
-    // cube.rotation.y += 0.008
 
     meshesTestCube.forEach((mesh, i) => {
         mesh.rotation.x += 0.003
@@ -770,10 +629,6 @@ function render() {
     // Fireflies 
     firefliesMaterial.uniforms.uTime.value = elapsedTime 
     renderer.render(scene, camera)
-
-    // // Smoke
-    // material.dispose();
-    // renderer.dispose();
 
     // Lights on background
     const light1Angle = elapsedTime * 0.23
