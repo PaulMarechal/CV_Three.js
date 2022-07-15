@@ -20,8 +20,10 @@ export function popupMobileScreenOrientation(){
             popup.style.zIndex = 99999;
 
             window.onclick = function(event) {
-                    popup.style.display = "none";
+                popup.style.display = "none";
             } 
         } 
-    } 
+    } else {
+        popup.style.display = "none";
+    }
 }

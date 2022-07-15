@@ -63,7 +63,7 @@ window.addEventListener('resize', () =>
 /**  
  * Popup for mobile device orientation
  */
-Popup.popupMobileScreenOrientation
+Popup.popupMobileScreenOrientation()
 
 /**
  * Cursor
