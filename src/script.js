@@ -4,21 +4,16 @@ import firefliesVertexShader from './shaders/fireflies/vertex.glsl'
 import firefliesFragmentShader from './shaders/fireflies/fragment.glsl'
 import testVertexShader from './shaders/test/vertex.glsl'
 import testFragmentShader from './shaders/test/fragment.glsl'
-import waterVertexShader from './shaders/water/vertex.glsl'
-import waterFragmentShader from './shaders/water/fragment.glsl'
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { gsap } from "gsap"
-import typefaceFont from 'three/examples/fonts/helvetiker_regular.typeface.json'
-import CircleType from 'circletype'
-import LocomotiveScroll from 'locomotive-scroll'
-import cursorDot from 'cursor-dot'
 import * as Sticker from './helpers/sticker.js'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as Cursor from "./helpers/cursor.js"
 import * as Font3D from './helpers/font3D.js'
 import * as Curved from './helpers/curvedPlane.js'
 import * as Background from './helpers/background.js'
+import * as Popup from './helpers/popup.js'
 
 const scene = new THREE.Scene()
 // const gui = new GUI({
@@ -64,6 +59,11 @@ window.addEventListener('resize', () =>
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
+
+/**  
+ * Popup for mobile device orientation
+ */
+Popup.popupMobileScreenOrientation
 
 /**
  * Cursor
@@ -193,13 +193,9 @@ const material = new THREE.MeshBasicMaterial({
     color: 0xfffffe,   
 })
 
+// Plane 
 const geometryPlane = new THREE.PlaneGeometry( 12, 40 );
-// const geometryPlaneRect = new THREE.PlaneGeometry( 1, 2 );
-// const geometryPlaneRectEcoles = new THREE.PlaneGeometry(3, 4);
-// const geometryPlaneRectImageVideo = new THREE.PlaneGeometry(18, 10);
-
 const materialPlane = new THREE.MeshBasicMaterial( {color: 0xffffff} );
-
 const plane = new THREE.Mesh( geometryPlane, materialPlane );
 plane.position.set(0, 1.5, -6)
 plane.rotation.y = 3
@@ -234,14 +230,6 @@ const scroll = window.scrollY
         stickyMenu.style.position = "sticky"
 	}
 }, false);
-
-
-// Cubes ( help for camera position)
-// const geometryCube = new THREE.BoxGeometry( 0.3, 0.3, 0.3 );
-// const materialCube = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-// const cube = new THREE.Mesh( geometryCube, materialCube );
-// cube.position.set(-0.9 ,3.2, -0.2)
-// scene.add( cube );
 
 /**
  * Background
@@ -292,7 +280,6 @@ const meshesTestCube = geometriesTestCube.map(
 
 meshesTestCube.forEach((mesh, i) => {
     scene.add(mesh);
-
     mesh.position.set(...positionsTestCube[i]);
 });
 
@@ -302,7 +289,6 @@ geometry.translate(0, -4, 0);
 // ------
 // Update
 // ------
-
 const update = (time, deltaTime) => {
 const ROTATE_TIME = 10; // Time in seconds for a full rotation
 const xAxis = new THREE.Vector3(1, 0, 0);
@@ -328,7 +314,6 @@ if (options.enableSwoopingCamera) {
 function lerp ( x, y, z ) {
   return(1 - z) * x + z * y
 }
-
 
 function scalePercent(start, end) {
     return (scrollPercent - start) / (end - start)
@@ -385,7 +370,7 @@ animationScripts.push({
         plane.position.y = lerp(40, 60, scalePercent(10, 20))
     },
 })
-// mesh.rotation.y = 0.65
+
 animationScripts.push({
     start: 20,
     end: 30,
@@ -497,11 +482,11 @@ document.body.onscroll = () => {
     // // Display percent and coordinates of camera 
     // (document.getElementById('scrollProgress')).innerText =
     //     'Scroll Progress : ' + scrollPercent.toFixed(2) + 
-    //     '\n  Camera.position.x : ' + camera.position.x + 
+    //     '\nCamera.position.x : ' + camera.position.x + 
     //     '\nCamera.position.y : ' + camera.position.y + 
-    //     '\n Camera.position.z : ' + camera.position.z + 
+    //     '\nCamera.position.z : ' + camera.position.z + 
     //     '\nCamera.rotation.y : ' + camera.rotation.y + 
-    //     '\n Camera.rotation.x : ' + camera.rotation.x
+    //     '\nCamera.rotation.x : ' + camera.rotation.x
 }
 
 /**

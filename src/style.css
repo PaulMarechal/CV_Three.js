@@ -6,7 +6,6 @@
     font-family: "Quicksand";
     src : url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap');
 }
-
   
 html,
 body {
@@ -14,7 +13,6 @@ body {
   scroll-behavior: smooth;
 }
 
-  
 *,
 *:before,
 *:after {
@@ -23,13 +21,27 @@ body {
   box-sizing: border-box;
 }
 
+.modal{
+    background-color: #00000077;
+    color: #fff;
+    margin: 5em auto 0 19%;
+    z-index: 9999;
+    padding: 30px;
+    font-size: x-large;
+    text-align: justify;
+}
+
+* {
+    cursor: none;
+    pointer-events: auto;
+}
+
 body {
     overflow-x: hidden;
     margin: 0px;
     font-family: monospace;
     color: white;
     font-family: "Monument";
-    /* font-size: 80px; */
     line-height: 70px;
 }
 
@@ -44,27 +56,20 @@ main {
     height: 200vw;
     z-index: 99;
     position: absolute;
-    /* justify-content: center; */
-    /* text-align: center; */
-    /* pointer-events: none; */
 }
 
 section {
     min-height: 100vh;
     padding: 20px;
     font-size: 3vh;
-    /* display: -webkit-box;
-    display: -ms-flexbox; */
-    /* text-transform: uppercase; */
-    /* background-color: transparent!important; */
 }
 
-.titleJob{
+.titleJob {
     line-height: 20px;
     padding-bottom: 5px;
 }
 
-.glass{
+.glass {
     background: rgba( 255, 255, 255, 0.25 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 12px );
@@ -76,7 +81,7 @@ section {
     margin: 3em 0em 9em 3em;
 }
 
-.glass1{
+.glass1 {
     background: rgba( 255, 255, 255, 0.25 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 12px );
@@ -89,7 +94,7 @@ section {
     margin: 6em 0em 9em 3em;
 }
 
-.glass2{
+.glass2 {
     background: rgba( 255, 255, 255, 0.25 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 12px );
@@ -97,12 +102,11 @@ section {
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     width: 35%;
-    /* margin-left: 5em; */
     padding: 0 0 1em 1.5em;
     margin: 6em 0em 9em 35em;
 }
 
-.glass3{
+.glass3 {
     background: rgba( 255, 255, 255, 0.25 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 12px );
@@ -110,12 +114,11 @@ section {
     border-radius: 10px;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     width: 35%;
-    /* margin-left: 5em; */
     padding: 0 1.5em 1em 1.5em;
     margin: 6em 0em 9em 3em;
 }
 
-.glass4{
+.glass4 {
     background: rgba( 255, 255, 255, 0.25 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 12px );
@@ -128,7 +131,7 @@ section {
     padding: 1em;
 }
 
-.glass5{
+.glass5 {
     background: rgba( 255, 255, 255, 0.25 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 12px );
@@ -149,24 +152,21 @@ section {
     font-size: 3vh;
 }
 
-.mainTitle{
+.mainTitle {
     color: #21272D; 
     margin-top: 3em;
     margin-right: 20px;
-    /* text-align: center;
-     justify-content: center!important; */
-    /* right: 0!important; */
     text-align: end;
     font-size: 10vh;
 }
 
-.contactMeStyle{
+.contactMeStyle {
     display: flex; 
     justify-content: space-around; 
     margin-left: -1em;
 }
 
-.liste{
+.liste {
     font-family: 'Quicksand', Courier, monospace;
     font-size: 2vh;
     line-height: 20px;
@@ -178,9 +178,7 @@ section {
     overflow: hidden;
     outline: 1px transparent;
     margin-top: -20.5em;
-    /* margin-top: -29.5%; */
     margin-left: 1.5em;
-
 }
 
 .mainMenu {
@@ -199,23 +197,20 @@ section {
     margin-left: 1.5em;
 }
 
-p{
+p {
     font-size: 15px;
     line-height: 20px;
     font-family: 'Quicksand', Courier, monospace;
     font-weight: lighter!important;
     text-align: justify;
-    /* mix-blend-mode: hard-light; */
 }
 
-h2{
+h2 {
     font-size: 23px;
-    /* padding-bottom: -1em; */
-    /* font-size: 15px; */
     mix-blend-mode: hard-light;
 }
 
-h4{
+h4 {
     font-size: 16px;
     line-height: 20px;
     padding-top: 1.5em;
@@ -223,15 +218,10 @@ h4{
     mix-blend-mode: hard-light;
 }
 
-h5{
+h5 {
     font-size: 13px;
     mix-blend-mode: hard-light;
 }
-
-
-
-/* test button */
-
 
 .button {
     font-family: 'Comfortaa',cursive;
@@ -258,29 +248,29 @@ h5{
     box-shadow: inset 0px 3px 5px rgba(255,255,255,1), 0px 0px 10px rgba(0,0,0,0.25);
 }
   
-a:-webkit-any-link{
+a:-webkit-any-link {
     text-decoration: none;
 }
 
-.specialSkills{
+.specialSkills {
     padding: 1em;
 }
 
-.arrow{
+.arrow {
     margin-top: 30%;
     margin-left: 55%;
     width: 30em;
 }
 
-.stickers{
+.stickers {
     position: relative;
 }
 
-img.sticker{
+img.sticker {
     position: absolute;
 }
 
-.sticker_quality{
+.sticker_quality {
     margin-left: 85%;
     margin-top: 3%; 
     width: 7em;
@@ -288,33 +278,12 @@ img.sticker{
     transform : rotate(12deg);
 }
 
-/* .sticker_crazy{
-    margin-left: 90%;
-    margin-top: 4%;
-    width: 7em;
-    height: 4.5em;
-    transform : rotate(-15deg);
-}  */
-
-/* .sticker_front_end{
-    margin-left: 45%;
-    margin-top: 39%; 
-    width: 14em;
-    height: 3em;
-    transform : rotate(-5deg);
-} */
-
-.sticker_new{
+.sticker_new {
     margin-left: 79%;
     margin-top: -2%;
     width: 7em;
     height: 6.5em;
     transform : rotate(30deg);
-}
-
-*{
-    cursor: none;
-    pointer-events: auto;
 }
 
 a:hover {
@@ -325,29 +294,25 @@ svg:hover {
     cursor: pointer!important;
 }
 
-/* test */
-.firstSection{
+.firstSection {
     color: #21272D; 
     z-index: 12;
 }
 
 .sticky-content, #topBarMenu {
-    /* position: sticky; */
     visibility: hidden;
-    /* display: none;  */
     top: 0.7em;
     z-index: 10;
     margin-top: 1em;
     background-color: #21272D70;
-    /* color: #FFFFFF; */
     color: currentcolor; 
     padding: 0rem 3em!important;
     border-bottom: 0.05rem solid #dfdfdf80;
     height: 60px;
     margin: 0.5em 1em;
-    /* margin: 3em 1em; */
     border-radius: 10px;
 }
+
 .sticky-content-title {
     padding-top: 1rem;
     z-index: 11;
@@ -357,19 +322,9 @@ svg:hover {
     scroll-behavior: smooth;
 }
 
-/* .sticky-content-title p{
-    background-color: #4f535750;
-    border-radius: 10px; 
-    padding: 10px 15px;
-    margin-top: -5px;
-} */
-
 a:hover {
     cursor: help!important;
 }
-/* .placeholder-content {
-    height: 100%;
-} */
 
 .placeholder-title {
     margin-top: 0.1rem;
@@ -377,26 +332,24 @@ a:hover {
     padding-left: 20px;
 }
 
-a, a:hover, a:visited, a:active
-{
+a, a:hover, a:visited, a:active {
 	color:#fff;
 	text-decoration:none;
 }
 
-/* fin test */
-
-/* Version portrait - test sur iphoneXS */
+/* Portrait version - test on iphoneXS */
 @media only screen 
 and (min-width: 360px) 
 and (max-width: 812px)
 and (orientation : portrait) {
+
     .mainTitle{
         font-size: 2.5rem!important;
-        margin-top: 2em;
+        margin-top: 2.5em;
     }
 
     .mainMenu{
-        top: 10em;
+        top: 13em;
         font-size: 1.3rem;
     }
 
@@ -409,6 +362,10 @@ and (orientation : portrait) {
         width: 95%;
         margin-right: auto;
         margin-left: auto;
+    }
+
+    .glass3{
+        margin-top: 15em;
     }
 
     .glass5{
@@ -427,60 +384,65 @@ and (orientation : portrait) {
     }
 
     .container{
-        margin-top: -11.3em;
+        margin-top: -15.1em;
         margin-left: 0.5em;
     }
 
+    .sticker_quality{
+        margin-left: 58%;
+        margin-top: -8%;
+    }
+
+    .sticker_new {
+        margin-left: 31%;
+        margin-top: -20%;
+    }
 }
 
-  
-
-/* Version paysage - test sur iphoneXS */
+/* Landscape version - test on iphoneXS */
 @media only screen 
-    and (min-device-width: 320px) 
-    and (max-device-width: 480px)
-    and (orientation : landscape)  {
+and (min-device-width: 320px) 
+and (max-device-width: 480px)
+and (orientation : landscape)  {
 
-        .mainTitle{
-            margin-right: 2em;
-            margin-top: 1em;
-        }
+    .mainTitle {
+        margin-right: 2em;
+        margin-top: 1em;
+    }
 
-        .mainMenu{
-            top: 0em!important;
-        }
+    .mainMenu {
+        top: 0em!important;
+    }
 
-        .container{
-            margin-top: -17.7em;
-            margin-left: 3em;
-            line-height: 50px;
-        }
+    .container {
+        margin-top: -17.7em;
+        margin-left: 3em;
+        line-height: 50px;
+    }
 
-        .glass, .glass1, .glass2, .glass3, .glass4{
-            width: 55%;    
-            margin: 3em 0em 9em 5em;
-        }
+    .glass, .glass1, .glass2, .glass3, .glass4 {
+        width: 55%;    
+        margin: 3em 0em 9em 5em;
+    }
 
-        .glass5{
-            width: 45%;
-            margin: 7em 0em 7em 5em;
+    .glass5 {
+        width: 45%;
+        margin: 7em 0em 7em 5em;
+    }
 
-        }
+    .liste {
+        font-size: 3vh;
+    }
 
-        .liste{
-            font-size: 3vh;
-        }
+    .menu {
+        margin-left: 3em;
+        line-height: 50px;
+    }
 
-        .menu{
-            margin-left: 3em;
-            line-height: 50px;
-        }
-
-        .arrow{
-            margin-top: 6%;
-            margin-left: 55%;
-        }
-    
+    .arrow { 
+        margin-top: 6%;
+        margin-left: 55%;
+    }
 }
 
 
