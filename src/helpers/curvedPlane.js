@@ -40,22 +40,22 @@ export function square(scene, imgPath, rotationY, position){
 
 export function allCurvedPictures(scene){
     // FeelinFood
-    const projectPicture1 = pictures(scene, 'images/feelinFood.jpg', 4.68, {x:0, y:4.42, z:1.3})
+    const projectPicture1 = pictures(scene, 'images/Projets/feelinFood.jpg', 4.68, {x:0, y:4.42, z:1.3})
 
     // ColorFoot
-    const projectPicture2 = pictures(scene, 'images/colorFoot.png', 5.1, {x:0.26, y:4.9, z:1.3})
+    const projectPicture2 = pictures(scene, 'images/Projets/colorFoot.png', 5.1, {x:0.26, y:4.9, z:1.3})
 
     // School&U
-    const projectPicture3 = pictures(scene, 'images/school.jpg', 5.2, {x:0.52, y:5.38, z:1.3})
+    const projectPicture3 = pictures(scene, 'images/Projets/school.jpg', 5.2, {x:0.52, y:5.38, z:1.3})
 
     // AeroBay
-    const projectPicture4 = pictures(scene, 'images/aerobay.png', 5.45, {x:0.9, y:5.87, z:1.04})
+    const projectPicture4 = pictures(scene, 'images/Projets/aerobay.png', 5.45, {x:0.9, y:5.87, z:1.04})
 
     // Forum 
-    const projectPicture5 = pictures(scene, 'images/forum.png', 5.8, {x:0.9, y:5.38, z:1.04})
+    const projectPicture5 = pictures(scene, 'images/Projets/forum.png', 5.8, {x:0.9, y:5.38, z:1.04})
 
     // FoodCulture Street
-    const projectPicture6 = pictures(scene, 'images/fcs.png', 5.5, {x:0.78, y:4.9, z:1.04})
+    const projectPicture6 = pictures(scene, 'images/Projets/fcs.png', 5.5, {x:0.78, y:4.9, z:1.04})
 
 
     // Autriche
