@@ -25,7 +25,7 @@ const textureLoader = new THREE.TextureLoader()
 /**
  * Fonts
  */
-Font3D.font(scene, 'WELCOME', 0.5, 0.2, '/textures/matcaps/8.png', {x: -3.13, y: 4.8, z: -2.61}, {x: 0, y: 2.6, z: 4.7})
+Font3D.font(scene, 'WELCOME', 0.5, 0.2, '/new_cv/textures/matcaps/8.png', {x: -3.13, y: 4.8, z: -2.61}, {x: 0, y: 2.6, z: 4.7})
 
 /**
  * Screen sizes
@@ -108,7 +108,7 @@ const materialObj = new THREE.MeshNormalMaterial()
 const matcapTexture = textureLoader.load('/textures/matcaps/8.png')
 let mixer; 
 fbxLoader.load(
-    'models/idle.fbx',
+    'models/Idle.fbx',
     (object) => {
 
         object.traverse( function ( child ) {

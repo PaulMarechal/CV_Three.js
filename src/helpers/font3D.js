@@ -7,7 +7,7 @@ const fontLoader = new FontLoader()
 
 export function font(scene, text, size, height, texture, position, rotation){
     fontLoader.load(
-        '/fonts/helvetiker_regular.typeface.json',
+        '/new_cv/fonts/helvetiker_regular.typeface.json',
         (font) =>
         {
             const textGeometry = new TextGeometry(
