@@ -22,13 +22,13 @@ body {
 }
 
 .modal{
-    background-color: #00000077;
+    /* background-color: #00000077; */
     color: #fff;
-    margin: 5em auto 0 19%;
+    /* margin: 5em auto 0 19%; */
     z-index: 9999;
     padding: 30px;
     font-size: x-large;
-    text-align: justify;
+    text-align: left;
 }
 
 * {
@@ -384,7 +384,7 @@ and (orientation : portrait) {
     }
 
     .container{
-        margin-top: -15.1em;
+        margin-top: -15.7em;
         margin-left: 0.5em;
     }
 
@@ -397,6 +397,37 @@ and (orientation : portrait) {
         margin-left: 31%;
         margin-top: -20%;
     }
+
+    /* .popupMobile p{
+        text-align: center;
+    } */
+
+    #iconeScreen{
+        text-align: center;
+    }
+
+    #iconeRotate{
+        width: 65%;
+        height: 65%;
+    }
+
+    #popupMobile{
+        background-color: #85848477;
+        border-radius: 5px;
+        border: 1px solid #525252 ;
+    }
+
+    .sticker_new{
+        margin-top: -20%;
+    }
+
+    #topBarMenu{
+        display: none;
+    }
+
+    .mainTitle{
+        margin-top: 4.5em;
+    }
 }
 
 /* Landscape version - test on iphoneXS */
@@ -407,7 +438,7 @@ and (orientation : landscape)  {
 
     .mainTitle {
         margin-right: 2em;
-        margin-top: 1em;
+        margin-top: 2.7em;
     }
 
     .mainMenu {
@@ -415,8 +446,8 @@ and (orientation : landscape)  {
     }
 
     .container {
-        margin-top: -17.7em;
-        margin-left: 3em;
+        margin-top: -23em;
+        margin-left: 3.2em;
         line-height: 50px;
     }
 
@@ -440,9 +471,31 @@ and (orientation : landscape)  {
     }
 
     .arrow { 
-        margin-top: 6%;
-        margin-left: 55%;
+        margin-top: 7.5%;
+        margin-left: 50%;
+        width: 12em;
     }
+
+    .sticker_quality{
+        margin-top: -6%;
+        margin-left: 74.5%;
+    }
+
+    .sticker_new{
+        margin-top: -8%;
+        margin-left: 65%;
+        width: 9em;
+        height: 8.5em;
+    }
+
+    .mainMenu{
+        margin-top: 1em;
+    }
+
+    #topBarMenu{
+        display: none;
+    }
+
 }
 
 

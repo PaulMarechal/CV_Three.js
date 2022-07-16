@@ -16,13 +16,14 @@ export function popupMobileScreenOrientation(){
     || navigator.userAgent.match(/Windows Phone/i)
     ){
         if (window.innerWidth < window.innerHeight){
-            popup.style.display = 'flex';
             popup.style.zIndex = 99999;
 
             window.onclick = function(event) {
                 popup.style.display = "none";
             } 
-        } 
+        } else if (window.innerWidth > window.innerHeight){
+            popup.style.display = 'none'
+        }
     } else {
         popup.style.display = "none";
     }
