@@ -167,12 +167,6 @@ const materialCylinder = new THREE.MeshBasicMaterial( {
 /**
  * Pictures 
  */
-// Photo de profil 
-const aproposPicture = new THREE.Mesh( geometryCylinder, materialCylinder );
-aproposPicture.rotation.y = 2.86
-aproposPicture.position.set(-1.31, 2.86, -1.83)
-scene.add( aproposPicture );
-
 Curved.allCurvedPictures(scene)
 
 

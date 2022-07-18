@@ -2,7 +2,7 @@ import * as THREE from 'three'
 
 export function pictures(scene, imgPath, rotationY, position){
 
-    const geometryCylinder = new THREE.CylinderGeometry( 0.65, 0.65, 0.42, 64, 25, 14, true, 1.1 );
+    const geometryCylinder = new THREE.CylinderGeometry( 0.65, 0.65, 0.42, 64, 25, 14, true, 0.97 );
     const materialCylinder = new THREE.MeshBasicMaterial({
         color: 0xffff00, 
         side: THREE.DoubleSide
@@ -39,6 +39,10 @@ export function square(scene, imgPath, rotationY, position){
 }
 
 export function allCurvedPictures(scene){
+
+    // Profil picture
+    const aproposPicture = pictures(scene, 'images/Profil/photoPaul.jpg', 2.86, {x:-1.31, y:2.86, z:-1.83})
+
     // FeelinFood
     const projectPicture1 = pictures(scene, 'images/Projets/feelinFood.jpg', 4.68, {x:0, y:4.42, z:1.3})
 
