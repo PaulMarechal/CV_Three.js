@@ -242,7 +242,7 @@ h5 {
     color: rgba(255,255,255,0.7);
     background: rgb(2,0,36);
     background: linear-gradient(45deg, rgba(2,0,36,0) 5%, rgba(255,255,255,.5) 6%, rgba(255,255,255,0) 9%, rgba(255,255,255,.5) 10%, rgba(255,255,255,0) 17%, rgba(255,255,255,.5) 19%, rgba(255,255,255,0) 21%);
-      background-size: 150%;
+    background-size: 150%;
     background-position: right;
     transition: 1s;
     width: 150px;

@@ -44,13 +44,13 @@ export function allCurvedPictures(scene){
     const aproposPicture = pictures(scene, 'images/Profil/photoPaul.jpg', 2.86, {x:-1.31, y:2.86, z:-1.83})
 
     // FeelinFood
-    const projectPicture1 = pictures(scene, 'images/Projets/feelinFood.jpg', 4.68, {x:0, y:4.42, z:1.3})
+    const projectPicture1 = pictures(scene, 'images/Projets/feelinFood.jpg', 4.68, {x:0.2, y:4.42, z:1.3})
 
     // ColorFoot
-    const projectPicture2 = pictures(scene, 'images/Projets/colorFoot.png', 5.1, {x:0.26, y:4.9, z:1.3})
+    const projectPicture2 = pictures(scene, 'images/Projets/colorFoot.png', 5.1, {x:0.32, y:4.9, z:1.3})
 
     // School&U
-    const projectPicture3 = pictures(scene, 'images/Projets/school.jpg', 5.2, {x:0.52, y:5.38, z:1.3})
+    const projectPicture3 = pictures(scene, 'images/Projets/school.jpg', 5.2, {x:0.59, y:5.38, z:1.25})
 
     // AeroBay
     const projectPicture4 = pictures(scene, 'images/Projets/aerobay.png', 5.45, {x:0.9, y:5.87, z:1.04})
@@ -66,10 +66,10 @@ export function allCurvedPictures(scene){
     const hobbiesPicture1 = pictures(scene, 'images/Hobbies/montagne2.png', 6.7, {x:1.3, y:6.6, z:0})
 
     // Madere
-    const hobbiesPicture2 = pictures(scene, 'images/Hobbies/madere1.png', 7.03, {x:1.1, y:7.1, z:-0.26})
+    const hobbiesPicture2 = pictures(scene, 'images/Hobbies/madere1.png', 7.03, {x:1.1, y:7.1, z:-0.2})
 
     // Maroc
-    const hobbiesPicture3 = pictures(scene, 'images/Hobbies/maroc3.png', 7.2, {x:0.9, y:7.6, z:-0.4})
+    const hobbiesPicture3 = pictures(scene, 'images/Hobbies/maroc3.png', 7.2, {x:0.9, y:7.6, z:-0.37})
 
     // Madere
     const hobbiesPicture4 = pictures(scene, 'images/Hobbies/montagne6.jpg', 6.7, {x:1.3, y:7.1, z:0.3})
