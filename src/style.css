@@ -23,8 +23,9 @@ body {
 
 .modal{
     /* background-color: #00000077; */
-    color: #fff;
+    color: #000;
     /* margin: 5em auto 0 19%; */
+    background-color: #fff;
     z-index: 9999;
     padding: 30px;
     font-size: x-large;
@@ -434,7 +435,7 @@ h2, h3, h4, h5{
 .nodeDiv { grid-area: 2 / 1 / 3 / 2; }
 .javaDiv { grid-area: 2 / 2 / 3 / 4; }
 
-/* Portrait version - test on iphoneXS */
+/* Portrait version - test on iPhone XS / iPhone 13 Pro Max / iPhone 14 Pro */
 @media only screen 
 and (min-width: 360px) 
 and (max-width: 812px)
@@ -466,7 +467,8 @@ and (orientation : portrait) {
     }
 
     .glass5{
-        width: 95%;
+        width: 20em;
+        /* height: 400em; */
         margin-right: auto;
         margin-left: auto;
     }
@@ -475,9 +477,13 @@ and (orientation : portrait) {
         color: black;
         stroke: #000; 
     }
-
+    /* 
     .linkLinkd, .linkEmail, .linkGit, .linkBook, .linkPhone{
         filter: invert(1)!important;
+    } */
+
+    .titleSection{
+        width: 70%!important;
     }
 
     .container{
@@ -495,9 +501,9 @@ and (orientation : portrait) {
         margin-top: -20%;
     }
 
-    /* .popupMobile p{
-        text-align: center;
-    } */
+    .languageStyle{
+        width: 95%;
+    }
 
     #iconeScreen{
         text-align: center;
@@ -509,9 +515,10 @@ and (orientation : portrait) {
     }
 
     #popupMobile{
-        background-color: #85848477;
+        background-color: #ffffff;
         border-radius: 5px;
-        border: 1px solid #525252 ;
+        /* border: 1px solid #525252 ; */
+        color: #fff;
     }
 
     .sticker_new{
@@ -525,9 +532,46 @@ and (orientation : portrait) {
     .mainTitle{
         margin-top: 4.5em;
     }
+
+    .contactMeSection {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+        
+    .gitSection { grid-area: 1 / 1 / 2 / 2; }
+    .linkedInSection { grid-area: 1 / 2 / 2 / 3; }
+    .emailSection { grid-area: 2 / 1 / 3 / 2; }
+    .bookSection { grid-area: 2 / 2 / 3 / 3; }
+    .phoneSection { grid-area: 3 / 1 / 4 / 2; }
+    .cvSection { grid-area: 3 / 2 / 4 / 3; }
+
+    .glass5{
+        height: 28em;
+    }
+
+    .marginLinkSection{
+        margin: 2em;
+    }
+
+    .contactMe{
+        margin-top: -5em;
+    }
+
+    a, a:hover, a:visited, a:active {
+        color:#000!important;
+        text-decoration:none;
+    }
+
+    .webgl{
+        width: 100%!important;
+        height: 100%!important;
+    }
 }
 
-/* Landscape version - test on iphoneXS */
+/* Landscape version - test on iPhone XS / iPhone 13 Pro Max / iPhone 14 Pro  */
 @media only screen 
 and (min-device-width: 320px) 
 and (max-device-width: 480px)
@@ -596,6 +640,16 @@ and (orientation : landscape)  {
 
     #topBarMenu{
         display: none;
+    }
+
+    a, a:hover, a:visited, a:active {
+        color:#000!important;
+        text-decoration:none;
+    }
+
+    .glass5 {
+        width: 95%;
+        margin: 50em auto 0 auto;
     }
 
 }

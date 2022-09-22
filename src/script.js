@@ -361,7 +361,7 @@ animationScripts.push({
         camera.position.z = lerp(-8, -1.5, scalePercent(10, 20))
         camera.position.y = lerp(1.5, 3, scalePercent(10, 20))
         camera.rotation.y = lerp(3, 4.5, scalePercent(10, 20))
-        plane.position.y = lerp(40, 60, scalePercent(10, 20))
+        plane.position.y = lerp(40, 90, scalePercent(10, 20))
     },
 })
 
